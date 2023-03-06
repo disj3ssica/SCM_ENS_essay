@@ -26,9 +26,56 @@
 
 
 \section{Synthetic Control Methods}
-Synthetic Control Methods have been originally proposed in Abadie and Gardeazabal (2003) and by Abadie et al. (2010) to estimate the effects of aggregate interventions.
-The key idea behind the method is that when the units of analysis are a few aggregate entities, a "synthetic control" that combines them can be a better counterfactual.
-Such a control is computed as a weighted average of all potential comparison units that best resemble the treated units.
+Synthetic Control Methods (SCM) have been originally proposed in Abadie and Gardeazabal 
+(2003) and by Abadie et al. (2010) to estimate the effects of aggregate interventions.
+The key idea behind the method is that, when units are a few aggregate entities, 
+a better counterfactual than using any single unit can be derived by computing a 
+combination of the untreated units that closely resembles the treated one, i.e. 
+a ``synthetic control". The selection of the ``donor units" is formalized with a data
+driven procedure.
+Although the method was originally intended for samples with few units, it has been 
+successfully applied in contexts with large samples, for instance in Acemoglu et 
+al. (2016).
+Such a synthetic control unit is computed as a weighted average of all potential 
+comparison units that best resemble the treated units. In this section, I will 
+introduce the method and explore feasibility, data requirements and methodological 
+issues. 
+The main references are Abadie and Gardeazabal (2003) and Abadie, Diamond and 
+Hainmueller (2010), which introduced the method in the literature, and Abadie 
+(2021), which provides a useful guide to the application of SCM.
+
+\subsection{Setting of SCM}
+Suppose to have data for $j=1,..,J+1$ units, and suppose that unit $j=1$ is the 
+treated unit. The ``donor pool" of untreated units which will contribute to the 
+construction of a synthetic control for unit $j=1$ is then constituted by the 
+remaining $j=2,...,J+1$ units.
+Assume that data covers $T$ periods, with periods up to $T_0$ being the 
+pre-intervention observations.
+
+For each unit $j$ at time $t$ data is available for the outcome of interest 
+$Y_{jt}$, and for a number $k$ of predictors $X_{1j}, ..., X_{kj}$. Define the 
+$k \times 1$ vectors $\mathbf{X}_1, ..., \mathbf{X}_{J+1}$ which contain values
+of the predictors for units $j=1,...,J+1$. Define the $k \times J$ matrix 
+$\mathbf{X}_0={\mathbf{X}_2,..., \mathbf{X}_{J+1}}$ which collects values of the predictors 
+for the untreated units.
+For each unit $j$, define the potential outcome without treatment as $Y_{jt}^N$.
+For the trated unit $j=1$, define the potential response under the treatment as 
+$Y_{jt}^I$ in the post treatment period $t>T_0$. The effect of the intervetion 
+for the affected unit $j=1$ for $t>T_0$ is: 
+$$\tau_{1t}=Y_{1t}^I-Y_{1t}^N$$.
+
+For the treated unit, $Y_{1t}^I$ is observed so that  $Y_{1t}=Y_{1t}^I$, but $Y_{jt}^N$ is not. 
+SCM provides a way to estimate $Y_{jt}^N$ for $t>T_0$, that is, how the outcome 
+of interest would have been in the absence of treatment. Notice that $\tau_{1t}$
+is allowed to change over time.
+
+\subsection{Estimating}
+
+
+
+
+
+
 
 
 \section{Literature review and general applications in macro}
@@ -56,9 +103,10 @@ Such a control is computed as a weighted average of all potential comparison uni
 
 \section{References}
 \begin{itemize}
-    \item Abadie, Alberto, Alexis Diamond, and Jens Hainmueller. "Synthetic control methods for comparative case studies: Estimating the effect of California’s tobacco control program." Journal of the American statistical Association 105.490 (2010): 493-505.
-    \item Abadie, Alberto, and Javier Gardeazabal. "The economic costs of conflict: A case study of the Basque Country." American economic review 93.1 (2003): 113-132.
-    \item Abadie, Alberto. "Using synthetic controls: Feasibility, data requirements, and methodological aspects." Journal of Economic Literature 59.2 (2021): 391-425.
+    \item Abadie, Alberto, Alexis Diamond, and Jens Hainmueller. ``Synthetic control methods for comparative case studies: Estimating the effect of California's tobacco control program." Journal of the American statistical Association 105.490 (2010): 493-505.
+    \item Abadie, Alberto, and Javier Gardeazabal. ``The economic costs of conflict: A case study of the Basque Country." American economic review 93.1 (2003): 113-132.
+    \item Abadie, Alberto. ``Using synthetic controls: Feasibility, data requirements, and methodological aspects." Journal of Economic Literature 59.2 (2021): 391-425.
+    \item Acemoglu, Daron, et al. ``The value of connections in turbulent times: Evidence from the United States." Journal of Financial Economics 121.2 (2016): 368-391.
 \end{itemize}
 
 
