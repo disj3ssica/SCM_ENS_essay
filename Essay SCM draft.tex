@@ -105,9 +105,6 @@ of weights less straightforward.
 % CHECK AGAIN INTERPRETATION OF NEGATIVE UNBOUNDED WEIGHTS AFTER READING SECT 4
 
 The core of the SCM estimation lies in the definition of the weights. 
-%Abadie and Gardeazabal (2003) and Abadie et al. (2010) state that weights 
-%should be chosen so that the resulting synthetic unit resembles the 
-%pre-intervetion values of predictors for the treated unit as closely as possible. 
 The approach in Abadie et al. (2021) is to optimize the weights with the aim of 
 minimizing the distance between the treatment and control group in the 
 pre-treatment period. Given the nonnegative constant vector $\mathbf{V}=(v_1,...,v_k)$ 
@@ -122,9 +119,34 @@ effect for the treated unit across $t=T_0+1,...,T$ as:
 $$ \hat{\tau}_{1t} = Y_{1t} - \sum_{j=2}^{J+1}{w^*_j Y_{jt}}$$
 
 Any possible choice of weights in $\mathbf{V}$ produces a different set of optimal 
-weights, which is effectively a different synthetic control
-$\mathbf{W}(\mathbf{V})=\left(w_2(\mathbf{V}),...,w_{J+1}(\mathbf{V})\right)'$. 
+weights, which is effectively a different synthetic control 
+$\mathbf{W}(\mathbf{V})=$ \newline $\left(w_2(\mathbf{V}),...,w_{J+1}(\mathbf{V})\right)'$.
 For this reason the choice of $\mathbf{V}$ is a key issue. 
+
+A proposed solution is to choose $\mathbf{v}$ such that the synthetic control 
+$\mathbf{W}(\mathbf{V})$ minimizes the mean squared prediction error (MSPE) of 
+the synthetic control with respect to $Y_{1t}^N$ over the pre treatment period
+$\mathcal{T}_0 = 1,..., T_0$ : 
+$$ \sum_{t\in\mathcal{T}} {\left(
+    Y_{1t}-w_2\mathbf(V)Y_{2t}-...-w_{J+1}(\mathbf{V})Y_{J+1t}
+\right)} ^2$$
+
+Another solution is out-of-sample validation, which requires substantial pre 
+treatment observations. This path exploits the observed pre treatment $Y_{1t}^N$
+to gauge the predictive power of the variables $X_{1j},...,X_{kj}$ and assign 
+coherent weights $\mathbf{V}$. To use out-of-sample validatio start by 
+dividing the $\mathcal{T}_0$ period in a \emph{training} period and a 
+\emph{validation} period. The lenghts of the two periods may depend on data 
+availability and frequency of measurement of outputs and variables. Then, for 
+every value $\mathbf{V}$, compute the synthetic control weights on the training 
+period and call them $\tilde{w}_2 \mathbf(V), ..., \tilde{w}_{J+1} \mathbf(V)$.
+The MSPE over the validation period will be:
+$$ \sum_{t=t_1+1}^{T_0} \left(
+    Y_{1t}-\tilde{w}_2 \mathbf(V) Y_{2t} - ... - 
+    \tilde{w}_{J+1} \mathbf(V) Y_{J+1t} \right)^2 $$
+Then, compute $\mathbf{V}^* \in \mathcal{V}$ such that MSPE is minimized.
+% qui lungo discorso sui pacchetti software e i metodi di minimizzazione, tipo
+% iterazione, nested optimization etc, see JDX MAFIA OSE material
 
 
 \subsection{ISSUES OF SCM}
