@@ -44,7 +44,7 @@ The main references are Abadie and Gardeazabal (2003) and Abadie, Diamond and
 Hainmueller (2010), which introduced the method in the literature, and Abadie 
 (2021), which provides a useful guide to the application of SCM.
 
-\subsection{Setting of SCM}
+\subsection{Setting the method}
 Suppose to have data for $j=1,..,J+1$ units, and suppose that unit $j=1$ is the 
 treated unit. The ``donor pool" of untreated units which will contribute to the 
 construction of a synthetic control for unit $j=1$ is then constituted by the 
@@ -62,20 +62,75 @@ For each unit $j$, define the potential outcome without treatment as $Y_{jt}^N$.
 For the trated unit $j=1$, define the potential response under the treatment as 
 $Y_{jt}^I$ in the post treatment period $t>T_0$. The effect of the intervetion 
 for the affected unit $j=1$ for $t>T_0$ is: 
-$$\tau_{1t}=Y_{1t}^I-Y_{1t}^N$$.
+$$\tau_{1t}=Y_{1t}^I-Y_{1t}^N$$
 
 For the treated unit, $Y_{1t}^I$ is observed so that  $Y_{1t}=Y_{1t}^I$, but $Y_{jt}^N$ is not. 
 SCM provides a way to estimate $Y_{jt}^N$ for $t>T_0$, that is, how the outcome 
 of interest would have been in the absence of treatment. Notice that $\tau_{1t}$
 is allowed to change over time.
 
-\subsection{Estimating}
+\subsection{Estimation}
+A downside of comparative case studies lies in the attempt to select the control 
+units by informally arguing for an affinity between the treated and the untreated 
+before the intervention. However, when using data from aggregate units such as 
+countries or regions, it can be difficult to find a proper counterfactual.
+SCM offers a formal procedure to select and combine the comparison units in order
+to create a scenario where unit $j=1$ was unaffected by treatment.
+
+Define $\mathbf{W}=w_2,...,w_{J+1}'$ as a $J\times 1$ vector of nonnegative weights
+that sum to one. 
+The $\mathbf{W}$ vector attributes a weight to each unit in the donor pool 
+$j=2,...,J+1$ and characterizes its contribution to the synthetic unit. 
+
+For a set of weights, $\mathbf{W}$, the estimators of $Y_{1t}^N$ and $\tau_{1t}$ are:
+$$ \hat{Y}_{1t}^N = \sum_{j=2}^{J+1} {w_jY_{jt}} $$
+$$ \hat{\tau}_{1t}=Y_{1t}- \hat{Y}_{1t}^N$$
+
+Nonnegative weights ensure a convex combination of the donor 
+units, so that the resulting control can be interpreted as a weighted average 
+of the control units with typically sparse weights. 
+Furthermore, it ensures comparability of the outcome variable by giving the 
+synthetic control outcome the same scale of the intervention unit. 
+Abadie (2021) notes that, when using weights that sum to one, variables in the data 
+should be rescaled to correct for differences in size between the units, for 
+instance by using per capita GDP instead of level GDP. This correction is not 
+needed if variables are already comparable, for instance in the case of prices.
+Allowing for weights outside of the $[0,1]$ interval may provide a more 
+accurate synthetic control by placing negative emphasis on some donor units that 
+are dissimilar to the treated one. However, negative unbounded weights may 
+introduce extrapolation, where the assigned weights are used to extrapolate 
+beyond the observed rage of data to estimate the effect of treatment. 
+This can lead to biased estimates and reduced precision, and makes the interpretation 
+of weights less straightforward. 
+% CHECK AGAIN INTERPRETATION OF NEGATIVE UNBOUNDED WEIGHTS AFTER READING SECT 4
+
+The core of the SCM estimation lies in the definition of the weights. 
+%Abadie and Gardeazabal (2003) and Abadie et al. (2010) state that weights 
+%should be chosen so that the resulting synthetic unit resembles the 
+%pre-intervetion values of predictors for the treated unit as closely as possible. 
+The approach in Abadie et al. (2021) is to optimize the weights with the aim of 
+minimizing the distance between the treatment and control group in the 
+pre-treatment period. Given the nonnegative constant vector $\mathbf{V}=(v_1,...,v_k)$ 
+that represent the relative importance of the $k$ predictors, the optimal 
+weight vector $\mathbf{W}^*$ is the one that minimizes:
+$$ || \mathbf{X}_1 - \mathbf{X_0} \mathbf{W} || = 
+\left( \sum_{h=1}^k {v_h \left( X_{h1}-w_2 X_{h2}-\ldots - w_{J+1} 
+X_{hJ+1} \right) ^2} \right)^{1/2} $$
+Subject to $\sum_{j=2}^{J+1}w_j$ and $w_j \geq 0$. The output $\mathbf{W}^*=
+\left( w_2^*,...,w_{J+1}^*\right) '$ is used in the estimation of the treatment 
+effect for the treated unit across $t=T_0+1,...,T$ as:
+$$ \hat{\tau}_{1t} = Y_{1t} - \sum_{j=2}^{J+1}{w^*_j Y_{jt}}$$
+
+Any possible choice of weights in $\mathbf{V}$ produces a different set of optimal 
+weights, which is effectively a different synthetic control
+$\mathbf{W}(\mathbf{V})=\left(w_2(\mathbf{V}),...,w_{J+1}(\mathbf{V})\right)'$. 
+For this reason the choice of $\mathbf{V}$ is a key issue. 
 
 
-
-
-
-
+\subsection{ISSUES OF SCM}
+\begin{itemize}
+    \item numerical instability -  see Kuosmanen 2021:1 and 2021:2 in OSE JDX mafia project
+\end{itemize}
 
 
 \section{Literature review and general applications in macro}
