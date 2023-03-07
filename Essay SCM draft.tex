@@ -57,7 +57,7 @@ $Y_{jt}$, and for a number $k$ of predictors $X_{1j}, ..., X_{kj}$. Define the
 $k \times 1$ vectors $\mathbf{X}_1, ..., \mathbf{X}_{J+1}$ which contain values
 of the predictors for units $j=1,...,J+1$. Define the $k \times J$ matrix 
 $\mathbf{X}_0={\mathbf{X}_2,..., \mathbf{X}_{J+1}}$ which collects values of the predictors 
-for the untreated units.
+or the untreated units.
 For each unit $j$, define the potential outcome without treatment as $Y_{jt}^N$.
 For the trated unit $j=1$, define the potential response under the treatment as 
 $Y_{jt}^I$ in the post treatment period $t>T_0$. The effect of the intervetion 
@@ -121,9 +121,12 @@ $$ \hat{\tau}_{1t} = Y_{1t} - \sum_{j=2}^{J+1}{w^*_j Y_{jt}}$$
 Any possible choice of weights in $\mathbf{V}$ produces a different set of optimal 
 weights, which is effectively a different synthetic control 
 $\mathbf{W}(\mathbf{V})=$ \newline $\left(w_2(\mathbf{V}),...,w_{J+1}(\mathbf{V})\right)'$.
-For this reason the choice of $\mathbf{V}$ is a key issue. 
+For this reason the choice of $\mathbf{V}$ is a key issue. An initial approach could 
+be to divide the predictor weights equally across the $k$ predictors included in the 
+model. However, two more elegant solutions are proposed by the authors.
 
-A proposed solution is to choose $\mathbf{v}$ such that the synthetic control 
+% PROCEDURE 1: SIMPLE MSPE MINIMIZATION
+A first proposed solution is to choose $\mathbf{V}$ such that the synthetic control 
 $\mathbf{W}(\mathbf{V})$ minimizes the mean squared prediction error (MSPE) of 
 the synthetic control with respect to $Y_{1t}^N$ over the pre treatment period
 $\mathcal{T}_0 = 1,..., T_0$ : 
@@ -131,6 +134,7 @@ $$ \sum_{t\in\mathcal{T}} {\left(
     Y_{1t}-w_2\mathbf(V)Y_{2t}-...-w_{J+1}(\mathbf{V})Y_{J+1t}
 \right)} ^2$$
 
+% PROCEDURE 2: OUT OF SAMPLE VALIDATION / CROSS VALIDATION (in Klossner 2018)
 Another solution is out-of-sample validation, which requires substantial pre 
 treatment observations. This path exploits the observed pre treatment $Y_{1t}^N$
 to gauge the predictive power of the variables $X_{1j},...,X_{kj}$ and assign 
@@ -144,12 +148,40 @@ The MSPE over the validation period will be:
 $$ \sum_{t=t_1+1}^{T_0} \left(
     Y_{1t}-\tilde{w}_2 \mathbf(V) Y_{2t} - ... - 
     \tilde{w}_{J+1} \mathbf(V) Y_{J+1t} \right)^2 $$
-Then, compute $\mathbf{V}^* \in \mathcal{V}$ such that MSPE is minimized.
+Then, compute $\mathbf{V}^* \in \mathcal{V}$ such that MSPE is minimized, with 
+$\mathcal{V}$ being the set of all potential $\mathbf{V}$. Then, check the synthetic 
+control's ability to emulate the treated unit behavior on the remaining validation 
+period observations by using $\mathcal{V}^*$ to compute $\mathcal{W}^*=\mathcal{W} 
+\mathcal(V)^*$.
+\newline For an analysis of the shortcomings of cross-validation as defined in this 
+section, see subsection 2.3.
+
+\subsubsection{Bias properties of SCM}
+Abadie and Hainmueller (2010) provide an analysis of the bias properties of synthetic 
+control estimators in the case of a linear factor model and a vector autoregressive 
+(VAR) model.
+
+% Complete by looking at the 2010 paper in detail.
+\textcolor{red}{Complete!!!}
+
+
+\subsubsection{Predictor selection}
+\textcolor{red}{Complete!!!}
+
+
+\subsection{Issues of SCM - Klößner (2018)} % and look for other papers
+An important note must be made about the validation weights, as noted by 
+Klößner et al. (2018). Predictor weights are not uniquely defined, so that when 
+replicating Abadie et al. (2015), the authors find different yet equivalent 
+solutions for the weights depending on the software package used (STATA versus R) 
+and on the specific donor units ordering (alphabetical versus custom) when using 
+out-of-sample validation.
+
+
 % qui lungo discorso sui pacchetti software e i metodi di minimizzazione, tipo
-% iterazione, nested optimization etc, see JDX MAFIA OSE material
+% iterazione, nested optimization etc? see JDX MAFIA OSE material
 
 
-\subsection{ISSUES OF SCM}
 \begin{itemize}
     \item numerical instability -  see Kuosmanen 2021:1 and 2021:2 in OSE JDX mafia project
 \end{itemize}
@@ -177,13 +209,14 @@ Then, compute $\mathbf{V}^* \in \mathcal{V}$ such that MSPE is minimized.
 \textcolor{red}{Lorem ipsum}
 
 
-
+\newpage
 \section{References}
 \begin{itemize}
     \item Abadie, Alberto, Alexis Diamond, and Jens Hainmueller. ``Synthetic control methods for comparative case studies: Estimating the effect of California's tobacco control program." Journal of the American statistical Association 105.490 (2010): 493-505.
     \item Abadie, Alberto, and Javier Gardeazabal. ``The economic costs of conflict: A case study of the Basque Country." American economic review 93.1 (2003): 113-132.
     \item Abadie, Alberto. ``Using synthetic controls: Feasibility, data requirements, and methodological aspects." Journal of Economic Literature 59.2 (2021): 391-425.
     \item Acemoglu, Daron, et al. ``The value of connections in turbulent times: Evidence from the United States." Journal of Financial Economics 121.2 (2016): 368-391.
+    \item Klößner, Stefan, et al. ``Comparative politics and the synthetic control method revisited: A note on Abadie et al.(2015)." Swiss journal of economics and statistics 154 (2018): 1-11.
 \end{itemize}
 
 
