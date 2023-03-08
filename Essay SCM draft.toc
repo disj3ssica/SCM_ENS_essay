@@ -3,10 +3,12 @@
 \contentsline {subsection}{\numberline {2.1}Setting the method}{3}{}%
 \contentsline {subsection}{\numberline {2.2}Estimation}{4}{}%
 \contentsline {subsubsection}{\numberline {2.2.1}Bias properties of SCM}{6}{}%
-\contentsline {subsubsection}{\numberline {2.2.2}Predictor selection}{6}{}%
-\contentsline {subsection}{\numberline {2.3}Issues of SCM - Klößner (2018)}{6}{}%
-\contentsline {section}{\numberline {3}Literature review and general applications in macro}{6}{}%
-\contentsline {section}{\numberline {4}Potential applications to Fleurbeay project}{6}{}%
-\contentsline {section}{\numberline {5}Data sourcing and explanations}{6}{}%
-\contentsline {section}{\numberline {6}Conclusion}{7}{}%
-\contentsline {section}{\numberline {7}References}{8}{}%
+\contentsline {subsubsection}{\numberline {2.2.2}Inference in SCM}{6}{}%
+\contentsline {subsection}{\numberline {2.3}How to use SCM: data and context requirements}{6}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}Requirements for credible application of SCM}{7}{}%
+\contentsline {subsection}{\numberline {2.4}Issues of SCM - Klößner (2018)}{8}{}%
+\contentsline {section}{\numberline {3}Literature review and general applications in macro}{8}{}%
+\contentsline {section}{\numberline {4}Potential applications to Fleurbeay project}{8}{}%
+\contentsline {section}{\numberline {5}Data sourcing and explanations}{8}{}%
+\contentsline {section}{\numberline {6}Conclusion}{8}{}%
+\contentsline {section}{\numberline {7}References}{9}{}%
