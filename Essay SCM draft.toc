@@ -4,11 +4,14 @@
 \contentsline {subsection}{\numberline {2.2}Estimation}{4}{}%
 \contentsline {subsubsection}{\numberline {2.2.1}Bias properties of SCM}{6}{}%
 \contentsline {subsubsection}{\numberline {2.2.2}Inference in SCM}{6}{}%
-\contentsline {subsection}{\numberline {2.3}How to use SCM: data and context requirements}{6}{}%
-\contentsline {subsubsection}{\numberline {2.3.1}Requirements for credible application of SCM}{7}{}%
-\contentsline {subsection}{\numberline {2.4}Issues of SCM - Klößner (2018)}{8}{}%
-\contentsline {section}{\numberline {3}Literature review and general applications in macro}{8}{}%
-\contentsline {section}{\numberline {4}Potential applications to Fleurbeay project}{8}{}%
-\contentsline {section}{\numberline {5}Data sourcing and explanations}{8}{}%
-\contentsline {section}{\numberline {6}Conclusion}{8}{}%
-\contentsline {section}{\numberline {7}References}{9}{}%
+\contentsline {subsection}{\numberline {2.3}A detour on methodological advantages}{6}{}%
+\contentsline {subsection}{\numberline {2.4}Contextual and data requirements for a credible application}{7}{}%
+\contentsline {subsubsection}{\numberline {2.4.1}Contextual requirements}{7}{}%
+\contentsline {subsubsection}{\numberline {2.4.2}Data requirements}{8}{}%
+\contentsline {subsection}{\numberline {2.5}Issues of SCM - Klößner (2018)}{8}{}%
+\contentsline {section}{\numberline {3}Applying SCM to climate change analysis}{9}{}%
+\contentsline {section}{\numberline {4}Literature review and general applications in macro}{9}{}%
+\contentsline {section}{\numberline {5}Potential applications to Fleurbeay project}{9}{}%
+\contentsline {section}{\numberline {6}Data sourcing and explanations}{9}{}%
+\contentsline {section}{\numberline {7}Conclusion}{9}{}%
+\contentsline {section}{\numberline {8}References}{10}{}%

@@ -128,7 +128,9 @@ weight vector $\mathbf{W}^*$ is the one that minimizes:
 $$ || \mathbf{X}_1 - \mathbf{X_0} \mathbf{W} || = 
 \left( \sum_{h=1}^k {v_h \left( X_{h1}-w_2 X_{h2}-\ldots - w_{J+1} 
 X_{hJ+1} \right) ^2} \right)^{1/2} $$
-Subject to $\sum_{j=2}^{J+1}w_j$ and $w_j \geq 0$. The output $\mathbf{W}^*=
+Subject to $\sum_{j=2}^{J+1}w_j$ and $w_j \geq 0$. That is, minimizing the distance 
+between the treated unit $\mathbf{X}_1$ and the weighted combination of the 
+control units $\mathbf{X_0} \mathbf{W}$. The output $\mathbf{W}^*=
 \left( w_2^*,...,w_{J+1}^*\right) '$ is used in the estimation of the treatment 
 effect for the treated unit across $t=T_0+1,...,T$ as:
 $$ \hat{\tau}_{1t} = Y_{1t} - \sum_{j=2}^{J+1}{w^*_j Y_{jt}}$$
@@ -185,7 +187,7 @@ estimator is unbiased.
 \subsubsection{Inference in SCM}
 \textcolor{red}{Complete!!!}
 
-\subsection{How to use SCM: data and context requirements}
+\subsection{A detour on methodological advantages}
 SCM come with advantages relative to other competing methods. In this subsection, 
 these features are emphasized with respect to linear regression estimators. 
 
@@ -214,10 +216,13 @@ Note that with many treated units the weights are not necessarily unique nor
 that sparse. Abadie and L'Hour (2019) offers a penalized version of SCM that 
 provides unique and sparse weights under some conditions.
 
-\subsubsection{Requirements for credible application of SCM}
+\subsection{Contextual and data requirements for a credible application}
+
 Most of the data and contextual requirements for successfull application of 
 SCM are applicable to any other comparative case study. Following Abadie (2021), I 
 will start from contextual requirements, and eventually move on to data requirements.
+
+\subsubsection{Contextual requirements}
 
 The first observation is on the volatility of outcomes. Excessive random noise in the 
 outcome variable increases the likelihood of over-fitting, therefore it is advised to 
@@ -253,7 +258,29 @@ affected donor units. Moreover, due to the transparency of the synthetic
 counterfactual and the sparsity of weights, the researcher may reason as to the 
 potential direction of the bias and account for that in their analysis.
 
+\subsubsection{Data requirements}
+For the method to accurately and credibly track the treated unit there must be 
+availability of a window of pre-treatment observations from all units. Using large 
+periods of time may present the issue of structural breaks in the pre-treatment 
+window, affecting the structural stability of the model. Accuracy of prediction 
+may suffer if we add enough observations, thus the predictive ability of the 
+synthetic control fails.
+
+Extensive post-treatment information is crucial for the evaluation of the effects, 
+especially if they are expected to intensify or dissipate over time.
+
+
+
 \subsection{Issues of SCM - Klößner (2018)} % and look for other papers
+Similar to any other technique, the application of synthetic controls demands 
+careful consideration of the proper data and contextual prerequisites that must be 
+fulfilled, along with fulfilling the required conditions for its use to claim a 
+causal explanation of outcomes. Various features are currently being debated and 
+enhanced in the literature, while some areas remain unexplored. 
+For instance, such an area is the investigation of computational aspects, 
+which is still relatively under-researched and holds significant potential for 
+improvement.
+
 An important note must be made about the validation weights, as noted by 
 Klößner et al. (2018). Predictor weights are not uniquely defined, so that when 
 replicating Abadie et al. (2015), the authors find different yet equivalent 
@@ -269,6 +296,10 @@ out-of-sample validation.
 \begin{itemize}
     \item numerical instability -  see Kuosmanen 2021:1 and 2021:2 in OSE JDX mafia project
 \end{itemize}
+
+\section{Applying SCM to climate change analysis}
+\textcolor{red}{inizia con riflessione sulle implicazioni della parte DATA E CONTEXT
+REQUIREMENTS per le applicazioni allo studio del cambiamento climatico}
 
 
 \section{Literature review and general applications in macro}
