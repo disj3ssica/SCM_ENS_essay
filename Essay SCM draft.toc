@@ -8,7 +8,7 @@
 \contentsline {subsection}{\numberline {2.4}Contextual and data requirements for a credible application}{7}{}%
 \contentsline {subsubsection}{\numberline {2.4.1}Contextual requirements}{7}{}%
 \contentsline {subsubsection}{\numberline {2.4.2}Data requirements}{8}{}%
-\contentsline {subsection}{\numberline {2.5}Issues of SCM - Klößner (2018)}{8}{}%
+\contentsline {subsection}{\numberline {2.5}Issues and solutions for successfull application}{8}{}%
 \contentsline {section}{\numberline {3}Applying SCM to climate change analysis}{9}{}%
 \contentsline {section}{\numberline {4}Literature review and general applications in macro}{9}{}%
 \contentsline {section}{\numberline {5}Potential applications to Fleurbeay project}{9}{}%

@@ -36,7 +36,8 @@ Professor Marc Fleurbaey.
 
 \section{Introduction}
 \textcolor{red}{Lorem ipsum}
-
+SCM termed by Athey and Imbens (2017) as ``arguably the most important innovation in the 
+policy evaluation literature in the last 15 years".
 
 
 
@@ -117,7 +118,6 @@ introduce extrapolation, where the assigned weights are used to extrapolate
 beyond the observed rage of data to estimate the effect of treatment. 
 This can lead to biased estimates and reduced precision, and makes the interpretation 
 of weights less straightforward. 
-% CHECK AGAIN INTERPRETATION OF NEGATIVE UNBOUNDED WEIGHTS AFTER READING SECT 4
 
 The core of the SCM estimation lies in the definition of the weights. 
 The approach in Abadie et al. (2021) is to optimize the weights with the aim of 
@@ -181,11 +181,11 @@ scenario can be constrained by a function that goes to zero as the amount of
 pre-treatment periods increases. In an VAR scenario, the synthetic control 
 estimator is unbiased.
 
-\textcolor{red}{maybe add something more detailed if you have time}
+\textcolor{red}{maybe add something more detailed if you have time} %add more
 
 
 \subsubsection{Inference in SCM}
-\textcolor{red}{Complete!!!}
+\textcolor{red}{Complete!!!} %complete
 
 \subsection{A detour on methodological advantages}
 SCM come with advantages relative to other competing methods. In this subsection, 
@@ -271,7 +271,7 @@ especially if they are expected to intensify or dissipate over time.
 
 
 
-\subsection{Issues of SCM - Klößner (2018)} % and look for other papers
+\subsection{Issues and solutions for successfull application} % and look for other papers
 Similar to any other technique, the application of synthetic controls demands 
 careful consideration of the proper data and contextual prerequisites that must be 
 fulfilled, along with fulfilling the required conditions for its use to claim a 
@@ -281,9 +281,11 @@ For instance, such an area is the investigation of computational aspects,
 which is still relatively under-researched and holds significant potential for 
 improvement.
 
+
+% KLOSSNER ET AL 2018
 An important note must be made about the validation weights, as noted by 
-Klößner et al. (2018). Predictor weights are not uniquely defined, so that when 
-replicating Abadie et al. (2015), the authors find different yet equivalent 
+Klößner et al. (2018). Predictor weights are not necessarily uniquely defined, so 
+that when replicating Abadie et al. (2015), the authors find different yet equivalent 
 solutions for the weights depending on the software package used (STATA versus R) 
 and on the specific donor units ordering (alphabetical versus custom) when using 
 out-of-sample validation.
@@ -330,8 +332,9 @@ REQUIREMENTS per le applicazioni allo studio del cambiamento climatico}
     \item Abadie, Alberto, Alexis Diamond, and Jens Hainmueller. ``Synthetic control methods for comparative case studies: Estimating the effect of California's tobacco control program." Journal of the American statistical Association 105.490 (2010): 493-505.
     \item Abadie, Alberto, and Javier Gardeazabal. ``The economic costs of conflict: A case study of the Basque Country." American economic review 93.1 (2003): 113-132.
     \item Abadie, Alberto. ``Using synthetic controls: Feasibility, data requirements, and methodological aspects." Journal of Economic Literature 59.2 (2021): 391-425.
-    \item Abadie, Alberto, and Jérémy L’hour. ``A penalized synthetic control estimator for disaggregated data." Journal of the American Statistical Association 116.536 (2021): 1817-1834.
+    \item Abadie, Alberto, and Jérémy L'hour. ``A penalized synthetic control estimator for disaggregated data." Journal of the American Statistical Association 116.536 (2021): 1817-1834.
     \item Acemoglu, Daron, et al. ``The value of connections in turbulent times: Evidence from the United States." Journal of Financial Economics 121.2 (2016): 368-391.
+    \item Athey, Susan, and Guido W. Imbens. ``The state of applied econometrics: Causality and policy evaluation." Journal of Economic perspectives 31.2 (2017): 3-32.
     \item Klößner, Stefan, et al. ``Comparative politics and the synthetic control method revisited: A note on Abadie et al.(2015)." Swiss journal of economics and statistics 154 (2018): 1-11.
 \end{itemize}
 
