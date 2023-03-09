@@ -1,5 +1,6 @@
 \documentclass[12pt,a4paper,draft]{article}
 \usepackage{xcolor}
+\usepackage{amsmath}
 
 \begin{document}
 
@@ -53,9 +54,12 @@ Although the method was originally intended for samples with few units, it has b
 successfully applied in contexts with large samples, for instance in Acemoglu et 
 al. (2016).
 Such a synthetic control unit is computed as a weighted average of all potential 
-comparison units that best resemble the treated units. In this section, I will 
-introduce the method and explore feasibility, data requirements and methodological 
-issues. 
+comparison units that best resemble the treated units. A good synthetic unit will 
+resemble treated one not only in terms of the outcomes variable (outer optimization), 
+but also in terms of the pre-treatment predictors value (inner optimization).
+
+In this section, I will introduce the method and explore feasibility, 
+data requirements and methodological issues. 
 The main references are Abadie and Gardeazabal (2003) and Abadie, Diamond and 
 Hainmueller (2010), which introduced the method in the literature, and Abadie 
 (2021), which provides a useful guide to the application of SCM.
@@ -78,7 +82,9 @@ For each unit $j$, define the potential outcome without treatment as $Y_{jt}^N$.
 For the trated unit $j=1$, define the potential response under the treatment as 
 $Y_{jt}^I$ in the post treatment period $t>T_0$. The effect of the intervetion 
 for the affected unit $j=1$ for $t>T_0$ is: 
-$$\tau_{1t}=Y_{1t}^I-Y_{1t}^N$$
+\begin{equation}
+\tau_{1t}=Y_{1t}^I-Y_{1t}^N
+\end{equation}
 
 For the treated unit, $Y_{1t}^I$ is observed so that  $Y_{1t}=Y_{1t}^I$, but $Y_{jt}^N$ is not. 
 SCM provides a way to estimate $Y_{jt}^N$ for $t>T_0$, that is, how the outcome 
@@ -99,8 +105,14 @@ The $\mathbf{W}$ vector attributes a weight to each unit in the donor pool
 $j=2,...,J+1$ and characterizes its contribution to the synthetic unit. 
 
 For a set of weights, $\mathbf{W}$, the estimators of $Y_{1t}^N$ and $\tau_{1t}$ are:
-$$ \hat{Y}_{1t}^N = \sum_{j=2}^{J+1} {w_jY_{jt}} $$
-$$ \hat{\tau}_{1t}=Y_{1t}- \hat{Y}_{1t}^N$$
+\begin{equation}
+    \hat{Y}_{1t}^N = \sum_{j=2}^{J+1} {w_jY_{jt}}
+\end{equation}
+
+\begin{equation}
+    \hat{\tau}_{1t}=Y_{1t}- \hat{Y}_{1t}^N
+\end{equation}
+
 
 Nonnegative weights ensure a convex combination of the donor 
 units, so that the resulting control can be interpreted as a weighted average 
@@ -124,16 +136,22 @@ The approach in Abadie et al. (2021) is to optimize the weights with the aim of
 minimizing the distance between the treatment and control group in the 
 pre-treatment period. Given the nonnegative constant vector $\mathbf{V}=(v_1,...,v_k)$ 
 that represent the relative importance of the $k$ predictors, the optimal 
-weight vector $\mathbf{W}^*$ is the one that minimizes:
-$$ || \mathbf{X}_1 - \mathbf{X_0} \mathbf{W} || = 
+weight vector $\mathbf{W}^*$ is the one that, for some positive constants $v_h$, minimizes:
+\begin{equation}
+    || \mathbf{X}_1 - \mathbf{X_0} \mathbf{W} || = 
 \left( \sum_{h=1}^k {v_h \left( X_{h1}-w_2 X_{h2}-\ldots - w_{J+1} 
-X_{hJ+1} \right) ^2} \right)^{1/2} $$
+X_{hJ+1} \right) ^2} \right)^{1/2}
+\end{equation}
+
 Subject to $\sum_{j=2}^{J+1}w_j$ and $w_j \geq 0$. That is, minimizing the distance 
 between the treated unit $\mathbf{X}_1$ and the weighted combination of the 
 control units $\mathbf{X_0} \mathbf{W}$. The output $\mathbf{W}^*=
 \left( w_2^*,...,w_{J+1}^*\right) '$ is used in the estimation of the treatment 
 effect for the treated unit across $t=T_0+1,...,T$ as:
-$$ \hat{\tau}_{1t} = Y_{1t} - \sum_{j=2}^{J+1}{w^*_j Y_{jt}}$$
+\begin{equation}
+    \hat{\tau}_{1t} = Y_{1t} - \sum_{j=2}^{J+1}{w^*_j Y_{jt}}
+\end{equation}
+
 
 Any possible choice of weights in $\mathbf{V}$ produces a different set of optimal 
 weights, which is effectively a different synthetic control 
@@ -147,9 +165,12 @@ A first proposed solution is to choose $\mathbf{V}$ such that the synthetic cont
 $\mathbf{W}(\mathbf{V})$ minimizes the mean squared prediction error (MSPE) of 
 the synthetic control with respect to $Y_{1t}^N$ over the pre treatment period
 $\mathcal{T}_0 = 1,..., T_0$ : 
-$$ \sum_{t\in\mathcal{T}} {\left(
+\begin{equation}
+    \sum_{t\in\mathcal{T}} {\left(
     Y_{1t}-w_2\mathbf(V)Y_{2t}-...-w_{J+1}(\mathbf{V})Y_{J+1t}
-\right)} ^2$$
+\right)} ^2
+\end{equation}
+
 
 % PROCEDURE 2: OUT OF SAMPLE VALIDATION / CROSS VALIDATION (in Klossner 2018)
 Another solution is out-of-sample validation, which requires substantial pre 
@@ -162,9 +183,12 @@ availability and frequency of measurement of outputs and variables. Then, for
 every value $\mathbf{V}$, compute the synthetic control weights on the training 
 period and call them $\tilde{w}_2 \mathbf(V), ..., \tilde{w}_{J+1} \mathbf(V)$.
 The MSPE over the validation period will be:
-$$ \sum_{t=t_1+1}^{T_0} \left(
+\begin{equation}
+    \sum_{t=t_1+1}^{T_0} \left(
     Y_{1t}-\tilde{w}_2 \mathbf(V) Y_{2t} - ... - 
-    \tilde{w}_{J+1} \mathbf(V) Y_{J+1t} \right)^2 $$
+    \tilde{w}_{J+1} \mathbf(V) Y_{J+1t} \right)^2
+\end{equation}
+
 Then, compute $\mathbf{V}^* \in \mathcal{V}$ such that MSPE is minimized, with 
 $\mathcal{V}$ being the set of all potential $\mathbf{V}$. Then, check the synthetic 
 control's ability to emulate the treated unit behavior on the remaining validation 
@@ -218,7 +242,7 @@ provides unique and sparse weights under some conditions.
 
 \subsection{Contextual and data requirements for a credible application}
 
-Most of the data and contextual requirements for successfull application of 
+Most of the data and contextual requirements for successful application of 
 SCM are applicable to any other comparative case study. Following Abadie (2021), I 
 will start from contextual requirements, and eventually move on to data requirements.
 
@@ -271,7 +295,7 @@ especially if they are expected to intensify or dissipate over time.
 
 
 
-\subsection{Issues and solutions for successfull application} % and look for other papers
+\subsection{Issues and solutions for successful application} % and look for other papers
 Similar to any other technique, the application of synthetic controls demands 
 careful consideration of the proper data and contextual prerequisites that must be 
 fulfilled, along with fulfilling the required conditions for its use to claim a 
@@ -281,18 +305,111 @@ For instance, such an area is the investigation of computational aspects,
 which is still relatively under-researched and holds significant potential for 
 improvement.
 
+% ASHOK ET AL 2015
+\subsubsection*{\textcolor{red}{ELIMINATE??}\textit{Kaul et al. (2015) on the inclusion of all lagged dependent variables}}
+The predictors in a synthetic control application can be lagged outcome variables and other 
+economically relevant variables with explanatory power for the dependent. Although 
+the intuitive approach would be to include all pre-treatment lagged outcome 
+variables and all the covariates, doing so could nullify the effect of the covariates 
+for both nested and regression optimization approaches. The potental bias arising 
+from this mechanic is something to be mindful of when considering what to include 
+in the model.
 
+To illustrate this, write predictor matrices as:
+\begin{equation}
+    X_1 = \left( \begin{matrix} C_1 \\ Z_1 \end{matrix} \right), \;
+    X_0 = \left( \begin{matrix} C_0 \\ Z_0 \end{matrix} \right)
+\end{equation}
+
+Where $C_i$ represent covariates, and $Z_i$ represent the dependent variable elements.
+In a similar manner, rewrite matrix $V$ as:
+\begin{equation}
+    V = \begin{pmatrix}
+        V_C & 0 \\
+        0 & V_Z
+    \end{pmatrix}
+\end{equation}
+So that $V_C$ contains the covariate weights, and $V_Z$ contains the lagged dependent 
+variable weights.
+
+For given predictor weights $V$, we can write the inner optimization to find $W(V)^*$ as:
+\begin{equation}
+    \min_{W} \sqrt{(X_1-X_0 W)' V (X_1-X_0 W)}
+\end{equation}
+And the outer optimization to find the optimal $V$ that minimizes the MSPE as:
+\begin{equation}
+    \min_V (Z_1 - Z_0  W^*(V))' (Z_1 - Z_0 W^*(V))
+\end{equation}
+
+If we denote $W^{**}$ as:
+\begin{equation}
+    W^{**} := \underset{W}{\arg\min}  (Z_1 -Z_0 W)' (Z_1-Z_0 W) 
+\end{equation}
+Then, for any $V$ we would have:
+\begin{equation}
+    (Z_1-Z_0 W^{**})' (Z_1-Z_0 W^{**}) \le (Z_1 - Z_0  W^*(V))' (Z_1 - Z_0 W^*(V))
+\end{equation}
+However, choosing $V$ such that $V_C$ is zero and $V_Z$ is the identity matrix yields:
+\begin{equation}
+    W^* (V^*) = W^{**}
+\end{equation}
+
+The implication of this is that the outer optimization would want null predictor weights 
+even if the inner optimization would assign them positive weights. Thus, the synthetic 
+control would end up ignoring the covariates. Consequently, even if positive $V$ elements 
+are reported, they are effectively ignored. Bias emerges from this dynamic if the 
+covariates are relevant explanatory elements of the dependent. To solve for this, they 
+advise to exclude outcomes lags in the inner optimization so that positive weights 
+emerge for other predictors.
+
+The authors illustrate this by replicating a paper by Billmeier and Nannicini (2013), 
+and highlight a stark difference in estimated treatment effects when using all 
+pre-treatment dependent varibles observation as opposed to not doing so. 
+
+This dynamic may be exploited to understand the predictive power of predictors via the 
+comparison of a full lagged dependent variable model and a reduced lagged dependent 
+variable one. The discrepancy between results is indicative of whether to include 
+such covariates.
+
+\subsubsection*{\textit{Klößner et al. (2018) on the uniqueness of weights 
+when utilizing cross-validation techniques}}
 % KLOSSNER ET AL 2018
 An important note must be made about the validation weights, as noted by 
-Klößner et al. (2018). Predictor weights are not necessarily uniquely defined, so 
-that when replicating Abadie et al. (2015), the authors find different yet equivalent 
-solutions for the weights depending on the software package used (STATA versus R) 
-and on the specific donor units ordering (alphabetical versus custom) when using 
-out-of-sample validation.
+Klößner et al. (2018). When using the out-of-sample validation technique, 
+predictor weights are not necessarily uniquely defined, so that when replicating 
+Abadie et al. (2015) the authors find different yet equivalent solutions 
+for the weights depending on the software package used (specifically, R with 
+the SYNTH package versus STATA) and on the specific donor units ordering (alphabetical 
+versus custom).
+
+Cross-validation requires the sectioning of the pre-treatment observations 
+in a training period and validation period, and a two-step estimation procedure 
+that computes predictor and donor weights. This is opposed to the standard 
+one step estimation procedure of SCM and generates ambiguity on weights. 
+The authors develop a rule of thumb to gauge the extent of this ambiguity 
+in the estimates of the treatment effect that is centered on the difference 
+$k-\alpha$, where $k$ is the number of predictors and $\alpha$ is the number of 
+donor units that obtains positive weights in the training period.
+If $k-\alpha>0$, the predictor weights are not unique and there will be 
+proportionally increasing ambiguity.
+
+On the other hand, the one-step procedure to estimate donor weights $W^*(V^*)$ 
+provides a well-defined estimator that outputs unique donor weights. The authors 
+stress that the ill-defined cross-validation synthetic control estimator is no 
+failure of the method as such, and that the ambiguity may be negligible, although 
+a positive $k-\alpha$ is the typical scenario.
 
 
 % qui lungo discorso sui pacchetti software e i metodi di minimizzazione, tipo
 % iterazione, nested optimization etc? see JDX MAFIA OSE material
+
+
+% FERMAN 2020
+\subsubsection*{\emph{Ferman et al. (2020) on specification searching opportunities}}
+DOES NOT KNOW/AGREE WITH KLOSSNER PAPER ABOVE???
+
+% KUOSMANEN 2021
+
 
 
 \begin{itemize}
@@ -335,6 +452,7 @@ REQUIREMENTS per le applicazioni allo studio del cambiamento climatico}
     \item Abadie, Alberto, and Jérémy L'hour. ``A penalized synthetic control estimator for disaggregated data." Journal of the American Statistical Association 116.536 (2021): 1817-1834.
     \item Acemoglu, Daron, et al. ``The value of connections in turbulent times: Evidence from the United States." Journal of Financial Economics 121.2 (2016): 368-391.
     \item Athey, Susan, and Guido W. Imbens. ``The state of applied econometrics: Causality and policy evaluation." Journal of Economic perspectives 31.2 (2017): 3-32.
+    \item Kaul, Ashok, et al. ``Synthetic control methods: Never use all pre-intervention outcomes together with covariates." (2015).
     \item Klößner, Stefan, et al. ``Comparative politics and the synthetic control method revisited: A note on Abadie et al.(2015)." Swiss journal of economics and statistics 154 (2018): 1-11.
 \end{itemize}
 
