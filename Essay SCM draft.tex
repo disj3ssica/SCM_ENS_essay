@@ -228,7 +228,8 @@ regression weights may lie outstide of the $[0,1]$ interval (for a comparison
 of the outcomes of SCM and regression see Abadie, Diamond and Hainmueller (2015)). 
 
 \emph{No need for post-treatment outcomes.} Synthetic control weights can be computed 
-before the observation of post-treatment outcomes. \textcolor{red}{EXPAND}
+before the observation of post-treatment outcomes, so that a researcher may decide 
+on the design of the study without knowing how it would affect the conclusions.
 
 \emph{Weight sparsity.} When estimating weights for 
 the control group, regression estimators typically provide non zero weights to all control 
@@ -306,10 +307,12 @@ which is still relatively under-researched and holds significant potential for
 improvement.
 
 % ASHOK ET AL 2015
-\subsubsection*{\textcolor{red}{ELIMINATE??}\textit{Kaul et al. (2015) on the inclusion of all lagged dependent variables}}
+\subsubsection*{\textit{Kaul et al. (2015) on the inclusion of lagged dependent variables}}
 The predictors in a synthetic control application can be lagged outcome variables and other 
-economically relevant variables with explanatory power for the dependent. Although 
-the intuitive approach would be to include all pre-treatment lagged outcome 
+economically relevant variables with explanatory power for the dependent. Generally, 
+the lagged outcomes tend to have greater predictive power than the covariates included 
+in the model. 
+Although the intuitive approach would be to include all pre-treatment lagged outcome 
 variables and all the covariates, doing so could nullify the effect of the covariates 
 for both nested and regression optimization approaches. The potental bias arising 
 from this mechanic is something to be mindful of when considering what to include 
@@ -340,7 +343,6 @@ And the outer optimization to find the optimal $V$ that minimizes the MSPE as:
 \begin{equation}
     \min_V (Z_1 - Z_0  W^*(V))' (Z_1 - Z_0 W^*(V))
 \end{equation}
-
 If we denote $W^{**}$ as:
 \begin{equation}
     W^{**} := \underset{W}{\arg\min}  (Z_1 -Z_0 W)' (Z_1-Z_0 W) 
@@ -354,7 +356,7 @@ However, choosing $V$ such that $V_C$ is zero and $V_Z$ is the identity matrix y
     W^* (V^*) = W^{**}
 \end{equation}
 
-The implication of this is that the outer optimization would want null predictor weights 
+The implication is that the outer optimization would want null predictor weights 
 even if the inner optimization would assign them positive weights. Thus, the synthetic 
 control would end up ignoring the covariates. Consequently, even if positive $V$ elements 
 are reported, they are effectively ignored. Bias emerges from this dynamic if the 
@@ -374,8 +376,10 @@ such covariates.
 \subsubsection*{\textit{Klößner et al. (2018) on the uniqueness of weights 
 when utilizing cross-validation techniques}}
 % KLOSSNER ET AL 2018
-An important note must be made about the validation weights, as noted by 
-Klößner et al. (2018). When using the out-of-sample validation technique, 
+Some authors noticed numerical instability in the assigned predictor weights 
+when replicating results from Abadie and Gardeazabal (2003). 
+Klößner et al. (2018) investigate this ambiguity by looking at validation weights. 
+When using the out-of-sample validation technique, 
 predictor weights are not necessarily uniquely defined, so that when replicating 
 Abadie et al. (2015) the authors find different yet equivalent solutions 
 for the weights depending on the software package used (specifically, R with 
@@ -400,15 +404,93 @@ failure of the method as such, and that the ambiguity may be negligible, althoug
 a positive $k-\alpha$ is the typical scenario.
 
 
-% qui lungo discorso sui pacchetti software e i metodi di minimizzazione, tipo
-% iterazione, nested optimization etc? see JDX MAFIA OSE material
+% KUOSMANEN 2021
+\subsubsection*{\emph{Kuosmanen et al. (2021) on the true nature of numerical instability}}
+In contrast with the findings from Klößner et al. (2018) that point to the 
+cross-validation method as culprit, Kuosmanent et al. (2021) ascribe numerical 
+instability to the commonly used \emph{Synth} package algorithm available for 
+R, STATA and Matlab and the MSCMT algorithm which produce unstable and suboptimal 
+weights that to converge to the existing optimum unique solution. 
+Therefore, different ordering of the donors and predictors affect the results. 
+
+The authors stress that numerical instability is not the underlying flaw, but more 
+a symptom. They show that the model has a tendency for corner solutions that 
+is the true design flaw of caused by joint optimization of donor and 
+predictors weights. Their proposed solution is to determine predictor and donor 
+weights by applying a two-step algorithm that optimizes the donor 
+weights when the predicor weights are given (note that the \emph{Synth} package 
+fails to derive optimal weights even when predictor weights are given). The
+authors provide the updated code and technical documentation for this approach 
+at their GitHub page (see p.4 of Kuosmanen et al. (2021) for the link).
+
+An explicit restatement of the SCM problem provided by Malo et al. (2020) 
+reveals the computational difficulty of problem that is a NP-hard bilevel 
+optimization problem:
+% mathematical formal restatement of the problem by Malo et al. (2020)
+\begin{equation}
+    \min_{\mathbf{v,w}} L_V = 
+    \frac{1}{T^{pre}} \left(y_1^{pre}-Y_0^{pre}w)\right) ' 
+    \left( y_1^{pre}-Y_0^{pre}w \right)
+\end{equation}
+
+subject to
+\begin{equation}
+    \mathbf{w}= argmin L_W = \left( x_1-X_0 w \right) \mathbf{V}
+    \left( x_1 - X_0 w\right)
+\end{equation}
+$$\mathbf{1'w}=1$$
+$$\mathbf{1'v}=1$$
+$$\mathbf{w}\ge 0, \mathbf{v} \ge 0$$
+Where $(15)$ is the outer optimization problem, and $(16)$ is the inner 
+optimization problem. $T^{pre}$ is the pre intervention period. This could be 
+interpreted as a social planner playing a Stackelberg game where the 
+leader chooses $\mathbf{v}$ and the follower chooses $\mathbf{w}$ cooperatively.
+
+The proposed solution is detailed next.
+
+\emph{Step 1}: Solve the quadratic optimization problem.
+$$
+    \min_w  L_Q = (x_q-X_0 w)' V^* (x_1 - X_0 w)
+$$
+
+subject to 
+
+$$ \mathbf{1'w=1} $$
+$$ \mathbf{w \ge 0} $$
+
+\emph{Step 2}: Given the step 1 optimal solution for $L_W^*$, solve the 
+convex optimization problem.
+
+
+
 
 
 % FERMAN 2020
 \subsubsection*{\emph{Ferman et al. (2020) on specification searching opportunities}}
-DOES NOT KNOW/AGREE WITH KLOSSNER PAPER ABOVE???
+The authors pose the issue of specification searching behavior in synthetic 
+control applications stemming from a lack of consensus about which specifications should 
+be used in SCM applications which has lead to a wide variety of choices in the 
+literature. If different model specifications lead to different synthetic control 
+units, the researcher may be tempted to discretionarily select the ones that lead 
+to stastically significant results. Via Monte Carlo and placebo simulations they 
+find that the probability of detecting a false positive is decreasing in the 
+number of available pre-treatment periods, but still large when the time window 
+is much greater than what is usually used in the literature.
 
-% KUOSMANEN 2021
+They explore opportunities for specification searching when selecting the number 
+of pre-treatment periods to include in the model. In accordance with Kaul et al.
+(2015), they suggest to not include all pre-treatment periods if the model 
+includes relevant covariates. If there are no covariates, the inclusion of all 
+pre-treatment periods is the MSPE minimizing choice. The recommendation is to 
+always include multiple sepcifications in synthetic control applications, and 
+use the full pre-treatment period model as a benchmark.
+
+A commonly used criterion to choose between different specifications is to 
+select the ones that minimise the MSPE over the validation period. Some examples 
+of this in practice are Dube and Zipperer (2015) and Donohue, Aneja and Weber 
+(2019).
+
+
 
 
 
@@ -452,6 +534,9 @@ REQUIREMENTS per le applicazioni allo studio del cambiamento climatico}
     \item Abadie, Alberto, and Jérémy L'hour. ``A penalized synthetic control estimator for disaggregated data." Journal of the American Statistical Association 116.536 (2021): 1817-1834.
     \item Acemoglu, Daron, et al. ``The value of connections in turbulent times: Evidence from the United States." Journal of Financial Economics 121.2 (2016): 368-391.
     \item Athey, Susan, and Guido W. Imbens. ``The state of applied econometrics: Causality and policy evaluation." Journal of Economic perspectives 31.2 (2017): 3-32.
+    \item Doudchenko, Nikolay, and Guido W. Imbens. ``Balancing, regression, difference-in-differences and synthetic control methods: A synthesis." No. w22791. National Bureau of Economic Research, 2016.
+    \item Dube, Arindrajit, and Ben Zipperer. ``Pooling multiple case studies using synthetic controls: An application to minimum wage policies." (2015).
+    \item Donohue, John J., Abhay Aneja, and Kyle D. Weber. ``Right-to-carry laws and violent crime: A comprehensive assessment using panel data and a state‐level synthetic control analysis." Journal of Empirical Legal Studies 16.2 (2019): 198-247.
     \item Kaul, Ashok, et al. ``Synthetic control methods: Never use all pre-intervention outcomes together with covariates." (2015).
     \item Klößner, Stefan, et al. ``Comparative politics and the synthetic control method revisited: A note on Abadie et al.(2015)." Swiss journal of economics and statistics 154 (2018): 1-11.
 \end{itemize}
