@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.1)  10 MAR 2023 18:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.1)  10 MAR 2023 20:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/cremj/Desktop/ENS/SCM ESSAY/SCM-ENS-essay/Essay SCM draft"
-(c:/Users/cremj/Desktop/ENS/SCM ESSAY/SCM-ENS-essay/Essay SCM draft.tex
+**"c:/Users/Jessica/Desktop/ENS/SCM/SCM/Essay SCM draft"
+(c:/Users/Jessica/Desktop/ENS/SCM/SCM/Essay SCM draft.tex
 LaTeX2e <2022-11-01> patch level 1
 L3 programming layer <2023-02-22> (c:/texlive/2022/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
@@ -147,14 +147,14 @@ LaTeX Font Info:    ... okay on input line 5.
  [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] (./Essay SCM draft.aux) ) 
 Here is how much of TeX's memory you used:
  2173 strings out of 476024
- 30908 string characters out of 5794017
+ 30864 string characters out of 5794017
  1859382 words of memory out of 5000000
  22645 multiletter control sequences out of 15000+600000
  520852 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,7n,62p,349b,200s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 56i,7n,62p,335b,200s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on "Essay SCM draft.pdf" (16 pages, 223497 bytes).
+Output written on "Essay SCM draft.pdf" (16 pages, 223960 bytes).
 PDF statistics:
  137 PDF objects out of 1000 (max. 8388607)
  86 compressed objects within 1 object stream
