@@ -415,17 +415,20 @@ Therefore, different ordering of the donors and predictors affect the results.
 
 The authors stress that numerical instability is not the underlying flaw, but more 
 a symptom. They show that the model has a tendency for corner solutions that 
-is the true design flaw of caused by joint optimization of donor and 
-predictors weights. Their proposed solution is to determine predictor and donor 
+is the true design flaw and is caused by joint optimization of donor and 
+predictors weights. The computational complexity of what is an NP-hard 
+bilevel optimization problem causes other packages to fail. 
+Their proposed solution is to determine predictor and donor 
 weights by applying a two-step algorithm that optimizes the donor 
 weights when the predicor weights are given (note that the \emph{Synth} package 
-fails to derive optimal weights even when predictor weights are given). The
+fails to derive optimal weights even when predictor weights are given), 
+an approach that builds on previous work by Malo et al. (2020). The
 authors provide the updated code and technical documentation for this approach 
 at their GitHub page (see p.4 of Kuosmanen et al. (2021) for the link).
 
 An explicit restatement of the SCM problem provided by Malo et al. (2020) 
-reveals the computational difficulty of problem that is a NP-hard bilevel 
-optimization problem:
+reveals the computational difficulty of problem. Following the paper's 
+notation:
 % mathematical formal restatement of the problem by Malo et al. (2020)
 \begin{equation}
     \min_{\mathbf{v,w}} L_V = 
@@ -445,21 +448,24 @@ Where $(15)$ is the outer optimization problem, and $(16)$ is the inner
 optimization problem. $T^{pre}$ is the pre intervention period. This could be 
 interpreted as a social planner playing a Stackelberg game where the 
 leader chooses $\mathbf{v}$ and the follower chooses $\mathbf{w}$ cooperatively.
-
+\newline
 The proposed solution is detailed next.
 
 \emph{Step 1}: Solve the quadratic optimization problem.
 $$
     \min_w  L_Q = (x_q-X_0 w)' V^* (x_1 - X_0 w)
 $$
-
 subject to 
-
 $$ \mathbf{1'w=1} $$
 $$ \mathbf{w \ge 0} $$
 
 \emph{Step 2}: Given the step 1 optimal solution for $L_W^*$, solve the 
 convex optimization problem.
+$$ \min_w  L_V = (y_1^{pre}-Y_0^{pre}w)'(y_1^{pre}-Y_0^{pre}w)$$
+subject to
+$$ \mathbf{1'w=1} $$
+$$ \mathbf{w \ge 0} $$
+This procedure allows for multiple optima in Step 1, unlike \emph{Synth}.
 
 
 
@@ -537,6 +543,7 @@ REQUIREMENTS per le applicazioni allo studio del cambiamento climatico}
     \item Doudchenko, Nikolay, and Guido W. Imbens. ``Balancing, regression, difference-in-differences and synthetic control methods: A synthesis." No. w22791. National Bureau of Economic Research, 2016.
     \item Dube, Arindrajit, and Ben Zipperer. ``Pooling multiple case studies using synthetic controls: An application to minimum wage policies." (2015).
     \item Donohue, John J., Abhay Aneja, and Kyle D. Weber. ``Right-to-carry laws and violent crime: A comprehensive assessment using panel data and a state‐level synthetic control analysis." Journal of Empirical Legal Studies 16.2 (2019): 198-247.
+    \item Malo, Pekka, et al. ``Computing Synthetic Controls Using Bilevel Optimization." (2020).
     \item Kaul, Ashok, et al. ``Synthetic control methods: Never use all pre-intervention outcomes together with covariates." (2015).
     \item Klößner, Stefan, et al. ``Comparative politics and the synthetic control method revisited: A note on Abadie et al.(2015)." Swiss journal of economics and statistics 154 (2018): 1-11.
 \end{itemize}
