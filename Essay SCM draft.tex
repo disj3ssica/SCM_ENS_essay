@@ -36,13 +36,20 @@ Professor Marc Fleurbaey.
 
 
 \section{Introduction}
+
 \textcolor{red}{Lorem ipsum}
-SCM termed by Athey and Imbens (2017) as ``arguably the most important innovation in the 
+
+sSCM termed by Athey and Imbens (2017) as ``arguably the most important innovation in the 
 policy evaluation literature in the last 15 years".
 
 
 
+
+
+
+
 \section{Synthetic Control Methods}
+
 Synthetic Control Methods (SCM) have been originally proposed in Abadie and Gardeazabal 
 (2003) and by Abadie et al. (2010) to estimate the effects of aggregate interventions.
 The key idea behind the method is that, when units are a few aggregate entities, 
@@ -64,7 +71,9 @@ The main references are Abadie and Gardeazabal (2003) and Abadie, Diamond and
 Hainmueller (2010), which introduced the method in the literature, and Abadie 
 (2021), which provides a useful guide to the application of SCM.
 
+
 \subsection{Setting the method}
+
 Suppose to have data for $j=1,..,J+1$ units, and suppose that unit $j=1$ is the 
 treated unit. The ``donor pool" of untreated units which will contribute to the 
 construction of a synthetic control for unit $j=1$ is then constituted by the 
@@ -91,7 +100,9 @@ SCM provides a way to estimate $Y_{jt}^N$ for $t>T_0$, that is, how the outcome
 of interest would have been in the absence of treatment. Notice that $\tau_{1t}$
 is allowed to change over time.
 
+
 \subsection{Estimation}
+
 A downside of comparative case studies lies in the attempt to select the control 
 units by informally arguing for an affinity between the treated and the untreated 
 before the intervention. However, when using data from aggregate units such as 
@@ -160,6 +171,7 @@ For this reason the choice of $\mathbf{V}$ is a key issue. An initial approach c
 be to divide the predictor weights equally across the $k$ predictors included in the 
 model. However, two more elegant solutions are proposed by the authors.
 
+
 % PROCEDURE 1: SIMPLE MSPE MINIMIZATION
 A first proposed solution is to choose $\mathbf{V}$ such that the synthetic control 
 $\mathbf{W}(\mathbf{V})$ minimizes the mean squared prediction error (MSPE) of 
@@ -197,7 +209,10 @@ period observations by using $\mathcal{V}^*$ to compute $\mathcal{W}^*=\mathcal{
 \newline For an analysis of the shortcomings of cross-validation as defined in this 
 section, see subsection 2.3.
 
+
+
 \subsubsection{Bias properties of SCM}
+
 Appendix B of Abadie et al. (2010) provides an analysis of the bias properties of synthetic 
 control estimators in the case of a linear factor model and a vector autoregressive 
 (VAR) model. According to their findings, the estimator's bias in a factor model 
@@ -211,7 +226,10 @@ estimator is unbiased.
 \subsubsection{Inference in SCM}
 \textcolor{red}{Complete!!!} %complete
 
+
+
 \subsection{A detour on methodological advantages}
+
 SCM come with advantages relative to other competing methods. In this subsection, 
 these features are emphasized with respect to linear regression estimators. 
 
@@ -241,11 +259,14 @@ Note that with many treated units the weights are not necessarily unique nor
 that sparse. Abadie and L'Hour (2019) offers a penalized version of SCM that 
 provides unique and sparse weights under some conditions.
 
+
+
 \subsection{Contextual and data requirements for a credible application}
 
 Most of the data and contextual requirements for successful application of 
 SCM are applicable to any other comparative case study. Following Abadie (2021), I 
 will start from contextual requirements, and eventually move on to data requirements.
+
 
 \subsubsection{Contextual requirements}
 
@@ -284,6 +305,7 @@ counterfactual and the sparsity of weights, the researcher may reason as to the
 potential direction of the bias and account for that in their analysis.
 
 \subsubsection{Data requirements}
+
 For the method to accurately and credibly track the treated unit there must be 
 availability of a window of pre-treatment observations from all units. Using large 
 periods of time may present the issue of structural breaks in the pre-treatment 
@@ -296,7 +318,15 @@ especially if they are expected to intensify or dissipate over time.
 
 
 
-\subsection{Issues and solutions for successful application} % and look for other papers
+
+
+
+
+
+
+
+\section{Effectiveness of SCM: challenges and remedies}
+
 Similar to any other technique, the application of synthetic controls demands 
 careful consideration of the proper data and contextual prerequisites that must be 
 fulfilled, along with fulfilling the required conditions for its use to claim a 
@@ -306,8 +336,12 @@ For instance, such an area is the investigation of computational aspects,
 which is still relatively under-researched and holds significant potential for 
 improvement.
 
-% ASHOK ET AL 2015
-\subsubsection*{\textit{Kaul et al. (2015) on the inclusion of lagged dependent variables}}
+
+
+
+
+\subsection{Kaul et al. (2015) on the inclusion of lagged dependent variables}
+
 The predictors in a synthetic control application can be lagged outcome variables and other 
 economically relevant variables with explanatory power for the dependent. Generally, 
 the lagged outcomes tend to have greater predictive power than the covariates included 
@@ -373,9 +407,13 @@ comparison of a full lagged dependent variable model and a reduced lagged depend
 variable one. The discrepancy between results is indicative of whether to include 
 such covariates.
 
-\subsubsection*{\textit{Klößner et al. (2018) on the uniqueness of weights 
-when utilizing cross-validation techniques}}
-% KLOSSNER ET AL 2018
+
+
+
+
+\subsection{Klößner et al. (2018) on the uniqueness of weights 
+when utilizing cross-validation techniques}
+
 Some authors noticed numerical instability in the assigned predictor weights 
 when replicating results from Abadie and Gardeazabal (2003). 
 Klößner et al. (2018) investigate this ambiguity by looking at validation weights. 
@@ -404,8 +442,12 @@ failure of the method as such, and that the ambiguity may be negligible, althoug
 a positive $k-\alpha$ is the typical scenario.
 
 
-% KUOSMANEN 2021
-\subsubsection*{\emph{Kuosmanen et al. (2021) on the true nature of numerical instability}}
+
+
+
+
+\subsection{Kuosmanen et al. (2021) on the true nature of numerical instability}
+
 In contrast with the findings from Klößner et al. (2018) that point to the 
 cross-validation method as culprit, Kuosmanent et al. (2021) ascribe numerical 
 instability to the commonly used \emph{Synth} package algorithm available for 
@@ -468,8 +510,12 @@ $$ \mathbf{w \ge 0} $$
 This procedure allows for multiple optima in Step 1, unlike \emph{Synth}.
 
 
-% FERMAN 2020
-\subsubsection*{\emph{Ferman et al. (2020) on specification searching opportunities}}
+
+
+
+
+\subsection{Ferman et al. (2020) on specification searching opportunities}
+
 The authors pose the issue of specification searching behavior in synthetic 
 control applications stemming from a lack of consensus about which specifications should 
 be used in SCM applications which has lead to a wide variety of choices in the 
@@ -496,13 +542,21 @@ of this in practice are Dube and Zipperer (2015) and Donohue, Aneja and Weber
 
 
 
+
+
+
+
+
+
+
 \section{Applying SCM to climate change analysis}
 \textcolor{red}{inizia con riflessione sulle implicazioni della parte DATA E CONTEXT
 REQUIREMENTS per le applicazioni allo studio del cambiamento climatico}
 
 
-\section{Literature review and general applications in macro}
-\textcolor{red}{Lorem ipsum}
+
+
+
 
 
 
@@ -513,14 +567,28 @@ REQUIREMENTS per le applicazioni allo studio del cambiamento climatico}
 
 
 
+
+
+
+
 \section{Data sourcing and explanations}
 \textcolor{red}{Lorem ipsum}
 
 
 
 
+
+
+
+
+
 \section{Conclusion}
 \textcolor{red}{Lorem ipsum}
+
+
+
+
+
 
 
 \newpage
