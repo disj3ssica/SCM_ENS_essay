@@ -8,9 +8,12 @@
 \contentsline {subsection}{\numberline {2.4}Contextual and data requirements for a credible application}{7}{}%
 \contentsline {subsubsection}{\numberline {2.4.1}Contextual requirements}{7}{}%
 \contentsline {subsubsection}{\numberline {2.4.2}Data requirements}{8}{}%
-\contentsline {subsection}{\numberline {2.5}Issues and solutions for successful application}{8}{}%
-\contentsline {section}{\numberline {3}Applying SCM to climate change analysis}{13}{}%
-\contentsline {section}{\numberline {4}Literature review and general applications in macro}{13}{}%
+\contentsline {section}{\numberline {3}Effectiveness of SCM: challenges and remedies}{8}{}%
+\contentsline {subsection}{\numberline {3.1}Kaul et al. (2015) on the inclusion of lagged dependent variables}{9}{}%
+\contentsline {subsection}{\numberline {3.2}Klößner et al. (2018) on the uniqueness of weights when utilizing cross-validation techniques}{10}{}%
+\contentsline {subsection}{\numberline {3.3}Kuosmanen et al. (2021) on the true nature of numerical instability}{11}{}%
+\contentsline {subsection}{\numberline {3.4}Ferman et al. (2020) on specification searching opportunities}{12}{}%
+\contentsline {section}{\numberline {4}Applying SCM to climate change analysis}{13}{}%
 \contentsline {section}{\numberline {5}Potential applications to Fleurbeay project}{13}{}%
 \contentsline {section}{\numberline {6}Data sourcing and explanations}{13}{}%
 \contentsline {section}{\numberline {7}Conclusion}{13}{}%
