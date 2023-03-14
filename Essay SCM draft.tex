@@ -28,10 +28,10 @@ Professor Marc Fleurbaey.
 
 \tableofcontents
 
-\newpage
-\begin{abstract}
-    \textcolor{red}{Lorem ipsum}
-\end{abstract}
+%\newpage
+%\begin{abstract}
+%    \textcolor{red}{Lorem ipsum}
+%\end{abstract}
 \newpage
 
 
@@ -284,7 +284,6 @@ This entails the elimination from the
 donor pool of any unit which may have suffered a shock to the outcome that would 
 not have happened in the absence of treatment in unit of interest.
 
-\textcolor{red}{add reflection on climate change shocks usually being common shocks}
 
 Third, a typical concern is anticipatory behavior by the units which would 
 introduce bias in the SCM estimates. Depending on data avilability, a solution 
@@ -541,6 +540,36 @@ of this in practice are Dube and Zipperer (2015) and Donohue, Aneja and Weber
 
 
 
+\subsection{Klößner and Pfeifer (2017) on using SCM as a forecasting techinque}
+Although the computation of a synthetic control does not strictly require post treatment
+values, not much work has been done on the use of SCM as a forecasting technique.
+In fact, Klößner and Pfeifer (2017) is the only academic work I could find on the 
+topic and is mostly an introduction to the possibility of using SCM in this context. 
+The authors compare the performance of SCM in forecasting US one period GDP growth 
+to other well-known forecasting methods such as Holt-Winters, Random Walk and 
+ARMA(p,q) with $p,q\in\{ 0,1,2,3,4\}$ are chosen with Akaike ans Bayes's information 
+criteria.
+
+The authors introduce a discount factor $\beta$ in the outer optimization problem 
+so that more recent observations weigh more:
+\begin{equation}
+    \min_{V} 
+    \sum_{t=1}^{T} {\beta^{T-t} \left( Y^1_t - 
+    \sum_{j=2}^{J+1} {W^*(V)_j Y^j_t} \right)^2}
+\end{equation}
+
+The inner optimization remains unchanged. 
+In the model, the aim is to forecast the first quarter of 2015 by using as 
+potential donors the lags of US GDP going 
+from $1, \dots, H$, where $H\in\{8,12,16,20,24,28,32,36,40\}$ is 
+the maximum lag included. No covariates are included in the model. 
+
+To compare the quality of the forecast, the authors use different criteria, among 
+which we find an average rank of the estimator according to forecast precision,
+mean absolute prediction error (MAPE) and root mean squared error (RMSPE).
+They find that RMSPE slightly favours SCM over other methods. When SCM is the 
+winner, a higher $\beta$ results in more precise estimates. Overall, SCM performs 
+competitively with respect to other methods. 
 
 
 
@@ -549,9 +578,22 @@ of this in practice are Dube and Zipperer (2015) and Donohue, Aneja and Weber
 
 
 
-\section{Applying SCM to climate change analysis}
-\textcolor{red}{inizia con riflessione sulle implicazioni della parte DATA E CONTEXT
-REQUIREMENTS per le applicazioni allo studio del cambiamento climatico}
+
+
+
+
+\section{Applying SCM to the analysis of extreme natural events}
+Synthetic control methods have been applied to the study of right-to-carry laws, 
+legalized prostitution, immigration policy, corporate connections, minimum wages and 
+much more. This section focuses on reviewing the literature that applies synthetic 
+control methods to the investigation of natural disasters and extreme natural 
+events. For each of the reviewed works, I will provide a description the data 
+and of which variation of SCM has been applied, as well as a brief review of 
+the outcomes. 
+
+
+
+\subsection{Cavallo et al. (2013) on catastrophic natural disasters and economic growth}
 
 
 
@@ -600,12 +642,17 @@ REQUIREMENTS per le applicazioni allo studio del cambiamento climatico}
     \item Abadie, Alberto, and Jérémy L'hour. ``A penalized synthetic control estimator for disaggregated data." Journal of the American Statistical Association 116.536 (2021): 1817-1834.
     \item Acemoglu, Daron, et al. ``The value of connections in turbulent times: Evidence from the United States." Journal of Financial Economics 121.2 (2016): 368-391.
     \item Athey, Susan, and Guido W. Imbens. ``The state of applied econometrics: Causality and policy evaluation." Journal of Economic perspectives 31.2 (2017): 3-32.
+    \item Barone, Guglielmo, and Sauro Mocetti. ``Natural disasters, growth and institutions: a tale of two earthquakes." Journal of Urban Economics 84 (2014): 52-66.
+    \item Cavallo, Eduardo, et al. ``Catastrophic natural disasters and economic growth." Review of Economics and Statistics 95.5 (2013): 1549-1561.
+    \item Coffman, Makena, and Ilan Noy. ``Hurricane Iniki: measuring the long-term economic impact of a natural disaster using synthetic control." Environment and Development Economics 17.2 (2012): 187-205.
     \item Doudchenko, Nikolay, and Guido W. Imbens. ``Balancing, regression, difference-in-differences and synthetic control methods: A synthesis." No. w22791. National Bureau of Economic Research, 2016.
     \item Dube, Arindrajit, and Ben Zipperer. ``Pooling multiple case studies using synthetic controls: An application to minimum wage policies." (2015).
     \item Donohue, John J., Abhay Aneja, and Kyle D. Weber. ``Right-to-carry laws and violent crime: A comprehensive assessment using panel data and a state‐level synthetic control analysis." Journal of Empirical Legal Studies 16.2 (2019): 198-247.
+    \item Luo, Kevin, and Tomoko Kinugasa. ``Do natural disasters influence long-term savings?: Assessing the impact of the 2008 Sichuan earthquake on household saving rates using synthetic control." China: An International Journal 18.3 (2020): 59-81.
     \item Malo, Pekka, et al. ``Computing Synthetic Controls Using Bilevel Optimization." (2020).
     \item Kaul, Ashok, et al. ``Synthetic control methods: Never use all pre-intervention outcomes together with covariates." (2015).
     \item Klößner, Stefan, et al. ``Comparative politics and the synthetic control method revisited: A note on Abadie et al.(2015)." Swiss journal of economics and statistics 154 (2018): 1-11.
+    \item Klößner, Stefan, and Gregor Pfeifer. ``Outside the box: Using synthetic control methods as a forecasting technique." Applied Economics Letters 25.9 (2018): 615-618.
 \end{itemize}
 
 
