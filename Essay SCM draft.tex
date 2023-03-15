@@ -35,15 +35,12 @@ Professor Marc Fleurbaey.
 \newpage
 
 
-\section{Introduction}
+\section{Introduction} %to do
 
 \textcolor{red}{Lorem ipsum}
 
 sSCM termed by Athey and Imbens (2017) as ``arguably the most important innovation in the 
 policy evaluation literature in the last 15 years".
-
-
-
 
 
 
@@ -85,10 +82,10 @@ For each unit $j$ at time $t$ data is available for the outcome of interest
 $Y_{jt}$, and for a number $k$ of predictors $X_{1j}, ..., X_{kj}$. Define the 
 $k \times 1$ vectors $\mathbf{X}_1, ..., \mathbf{X}_{J+1}$ which contain values
 of the predictors for units $j=1,...,J+1$. Define the $k \times J$ matrix 
-$\mathbf{X}_0={\mathbf{X}_2,..., \mathbf{X}_{J+1}}$ which collects values of the predictors 
+$\mathbf{X}_0= \left(\mathbf{X}_2,..., \mathbf{X}_{J+1}\right)$ which collects values of the predictors 
 or the untreated units.
 For each unit $j$, define the potential outcome without treatment as $Y_{jt}^N$.
-For the trated unit $j=1$, define the potential response under the treatment as 
+For the treated unit $j=1$, define the potential response under the treatment as 
 $Y_{jt}^I$ in the post treatment period $t>T_0$. The effect of the intervetion 
 for the affected unit $j=1$ for $t>T_0$ is: 
 \begin{equation}
@@ -101,18 +98,19 @@ of interest would have been in the absence of treatment. Notice that $\tau_{1t}$
 is allowed to change over time.
 
 
-\subsection{Estimation}
+
+\subsection{Estimation} %parte mancante su inferenza
 
 A downside of comparative case studies lies in the attempt to select the control 
 units by informally arguing for an affinity between the treated and the untreated 
 before the intervention. However, when using data from aggregate units such as 
 countries or regions, it can be difficult to find a proper counterfactual.
 SCM offers a formal procedure to select and combine the comparison units in order
-to create a scenario where unit $j=1$ was unaffected by treatment.
+to create a synthetic counterfactual scenario where unit $j=1$ was unaffected by treatment.
 
-Define $\mathbf{W}=w_2,...,w_{J+1}'$ as a $J\times 1$ vector of nonnegative weights
+Define $\mathbf{W}=w_2,...,w_{J+1}$ as a $J\times 1$ vector of nonnegative weights
 that sum to one. 
-The $\mathbf{W}$ vector attributes a weight to each unit in the donor pool 
+The $\mathbf{W}$ vector attributes a weight to each pre-treatment unit in the donor pool 
 $j=2,...,J+1$ and characterizes its contribution to the synthetic unit. 
 
 For a set of weights, $\mathbf{W}$, the estimators of $Y_{1t}^N$ and $\tau_{1t}$ are:
@@ -125,7 +123,7 @@ For a set of weights, $\mathbf{W}$, the estimators of $Y_{1t}^N$ and $\tau_{1t}$
 \end{equation}
 
 
-Nonnegative weights ensure a convex combination of the donor 
+Nonnegative weights ensure a convex combination of the pre-treatment values of donor 
 units, so that the resulting control can be interpreted as a weighted average 
 of the control units with typically sparse weights. 
 Furthermore, it ensures comparability of the outcome variable by giving the 
@@ -143,9 +141,10 @@ This can lead to biased estimates and reduced precision, and makes the interpret
 of weights less straightforward. 
 
 The core of the SCM estimation lies in the definition of the weights. 
-The approach in Abadie et al. (2021) is to optimize the weights with the aim of 
-minimizing the distance between the treatment and control group in the 
-pre-treatment period. Given the nonnegative constant vector $\mathbf{V}=(v_1,...,v_k)$ 
+The approach in Abadie et al. (2021) is to choose weights $w_2,...,w_{J+1}$ such that 
+the synthetic unit resembles pre-treatment values of the treated unit in terms 
+of the outcome variable.
+Given the nonnegative constant vector $\mathbf{V}=(v_1,...,v_k)$ 
 that represent the relative importance of the $k$ predictors, the optimal 
 weight vector $\mathbf{W}^*$ is the one that, for some positive constants $v_h$, minimizes:
 \begin{equation}
@@ -172,23 +171,21 @@ be to divide the predictor weights equally across the $k$ predictors included in
 model. However, two more elegant solutions are proposed by the authors.
 
 
-% PROCEDURE 1: SIMPLE MSPE MINIMIZATION
-A first proposed solution is to choose $\mathbf{V}$ such that the synthetic control 
-$\mathbf{W}(\mathbf{V})$ minimizes the mean squared prediction error (MSPE) of 
-the synthetic control with respect to $Y_{1t}^N$ over the pre treatment period
+The proposed solution is to choose $\mathbf{V}$ such that the synthetic 
+control $\mathbf{W}(\mathbf{V})$ minimizes the mean squared prediction error (MSPE) 
+of the synthetic control with respect to $Y_{1t}^N$ over the pre treatment period
 $\mathcal{T}_0 = 1,..., T_0$ : 
 \begin{equation}
     \sum_{t\in\mathcal{T}} {\left(
-    Y_{1t}-w_2\mathbf(V)Y_{2t}-...-w_{J+1}(\mathbf{V})Y_{J+1t}
+    Y_{1t}-w_2 \mathbf{(V)} Y_{2t}-...-w_{J+1}(\mathbf{V})Y_{J+1t}
 \right)} ^2
 \end{equation}
 
-
-% PROCEDURE 2: OUT OF SAMPLE VALIDATION / CROSS VALIDATION (in Klossner 2018)
-Another solution is out-of-sample validation, which requires substantial pre 
-treatment observations. This path exploits the observed pre treatment $Y_{1t}^N$
+% OUT OF SAMPLE EXPLANATION
+We could choose $\mathbf{V}$ via out-of-sample validation, which requires substantial 
+pre-treatment observations. This exploits the observed pre treatment $Y_{1t}^N$
 to gauge the predictive power of the variables $X_{1j},...,X_{kj}$ and assign 
-coherent weights $\mathbf{V}$. To use out-of-sample validatio start by 
+coherent weights $\mathbf{V}$. To use out-of-sample validation start by 
 dividing the $\mathcal{T}_0$ period in a \emph{training} period and a 
 \emph{validation} period. The lenghts of the two periods may depend on data 
 availability and frequency of measurement of outputs and variables. Then, for 
@@ -201,7 +198,8 @@ The MSPE over the validation period will be:
     \tilde{w}_{J+1} \mathbf(V) Y_{J+1t} \right)^2
 \end{equation}
 
-Then, compute $\mathbf{V}^* \in \mathcal{V}$ such that MSPE is minimized, with 
+Then, compute $\mathbf{V}^* \in \mathcal{V}$ such that MSPE is minimized over this 
+training period, with 
 $\mathcal{V}$ being the set of all potential $\mathbf{V}$. Then, check the synthetic 
 control's ability to emulate the treated unit behavior on the remaining validation 
 period observations by using $\mathcal{V}^*$ to compute $\mathcal{W}^*=\mathcal{W} 
@@ -223,8 +221,12 @@ estimator is unbiased.
 \textcolor{red}{maybe add something more detailed if you have time} %add more
 
 
-\subsubsection{Inference in SCM}
-\textcolor{red}{Complete!!!} %complete
+
+
+
+
+\subsubsection{Inference and robustness checks in SCM}
+\textcolor{red}{Talk about placebo studies and robustness checks. Check Barone Mocetti} %complete
 
 
 
@@ -245,7 +247,7 @@ restrictions placed on the weights, which prevent extrapolation. Instead,
 regression weights may lie outstide of the $[0,1]$ interval (for a comparison 
 of the outcomes of SCM and regression see Abadie, Diamond and Hainmueller (2015)). 
 
-\emph{No need for post-treatment outcomes.} Synthetic control weights can be computed 
+\emph{Discourages specification searching.} Synthetic control weights can be computed 
 before the observation of post-treatment outcomes, so that a researcher may decide 
 on the design of the study without knowing how it would affect the conclusions.
 
@@ -308,16 +310,12 @@ potential direction of the bias and account for that in their analysis.
 For the method to accurately and credibly track the treated unit there must be 
 availability of a window of pre-treatment observations from all units. Using large 
 periods of time may present the issue of structural breaks in the pre-treatment 
-window, affecting the structural stability of the model. Accuracy of prediction 
-may suffer if we add enough observations, thus the predictive ability of the 
-synthetic control fails.
+span, affecting the structural stability of the model. 
+Therefore, we must be aware of how using too long a window may compromise the 
+predictive ability of the synthetic unit. 
 
 Extensive post-treatment information is crucial for the evaluation of the effects, 
 especially if they are expected to intensify or dissipate over time.
-
-
-
-
 
 
 
@@ -334,8 +332,6 @@ enhanced in the literature, while some areas remain unexplored.
 For instance, such an area is the investigation of computational aspects, 
 which is still relatively under-researched and holds significant potential for 
 improvement.
-
-
 
 
 
@@ -409,9 +405,7 @@ such covariates.
 
 
 
-
-\subsection{Klößner et al. (2018) on the uniqueness of weights 
-when utilizing cross-validation techniques}
+\subsection{Klößner et al. (2018) on the uniqueness of weights when utilizing cross-validation techniques}
 
 Some authors noticed numerical instability in the assigned predictor weights 
 when replicating results from Abadie and Gardeazabal (2003). 
@@ -443,12 +437,10 @@ a positive $k-\alpha$ is the typical scenario.
 
 
 
-
-
 \subsection{Kuosmanen et al. (2021) on the true nature of numerical instability}
 
 In contrast with the findings from Klößner et al. (2018) that point to the 
-cross-validation method as culprit, Kuosmanent et al. (2021) ascribe numerical 
+cross-validation method as culprit, Kuosmanen et al. (2021) ascribe numerical 
 instability to the commonly used \emph{Synth} package algorithm available for 
 R, STATA and Matlab and the MSCMT algorithm which produce unstable and suboptimal 
 weights that to converge to the existing optimum unique solution. 
@@ -479,7 +471,7 @@ notation:
 
 subject to
 \begin{equation}
-    \mathbf{w}= argmin L_W = \left( x_1-X_0 w \right) \mathbf{V}
+    \mathbf{w}= argmin L_W = \left( x_1-X_0 w \right) ' \mathbf{V}
     \left( x_1 - X_0 w\right)
 \end{equation}
 $$\mathbf{1'w}=1$$
@@ -511,8 +503,6 @@ This procedure allows for multiple optima in Step 1, unlike \emph{Synth}.
 
 
 
-
-
 \subsection{Ferman et al. (2020) on specification searching opportunities}
 
 The authors pose the issue of specification searching behavior in synthetic 
@@ -534,9 +524,10 @@ always include multiple sepcifications in synthetic control applications, and
 use the full pre-treatment period model as a benchmark.
 
 A commonly used criterion to choose between different specifications is to 
-select the ones that minimise the MSPE over the validation period. Some examples 
+select the ones that minimize the MSPE over the validation period. Some examples 
 of this in practice are Dube and Zipperer (2015) and Donohue, Aneja and Weber 
 (2019).
+
 
 
 
@@ -594,12 +585,236 @@ the outcomes.
 
 
 \subsection{Cavallo et al. (2013) on catastrophic natural disasters and economic growth}
+This paper looks for empirical evidence on whether natural disasters affect economic growth.
+Economic theory does not provide a clear cut answer to the question, with neoclassical 
+growth model stating that the destruction of capital following a natural disaster should 
+not affect the rate of technological progress, hence it should only affect short term 
+growth, and endogenous growth models even stating that growth could be higher as a result 
+of reinvestment and upgrading of capital (think of the Schumpeterian creative destruction).
+
+\subsubsection*{Strategy}
+For each country affected by a natural disaster, the authors compute a counterfactual 
+via SCM. The synthetic controls are computed from data about unaffected countries with 
+the aim of producing a counterfactual for a country affected by a large not recurring 
+event. Only disasters before the year 2000 are considered.
+
+The model is applied on a sample of $J+1$ countries, where the first country $J=1$ is 
+affected by the disaster and the remaining $J$ countries are the donor pool. The aim is 
+to estimate $$\alpha_{it} = Y^I_{it} - Y^N_{it}$$ where $Y^I_{it}$ is GDP per capita 
+for country $i$ at time $t$ if the country is exposed to the disaster, and $Y^N_{it}$ 
+is GDP per capita for country $i$ at time $t$ in the absence of a disaster. 
+While $Y^I_{1t}$ is observed, we need to find an estimate for $Y^N_{1t}$. 
+Following Abadie et al. (2010), they proceed by estimating $W^*$ and $V^*$ such that 
+the MSPE is minimized using the out-of-sample validation technique. 
+
+
+\subsubsection*{Data}
+The authors use a dataset covering 196 countries between 1970 and 2008 which includes:
+\begin{itemize}
+    \item Data on real GDP per capita and purchasing power parity (PPP) from the World 
+    Bank and World Development Indicators (WDI).
+    \item GDP predictors for:
+    \begin{itemize}
+        \item Trade openness from WDI;
+        \item Capital stock from Penn World Tables (PWT);
+        \item Land area in km$^2$;
+        \item Population;
+        \item Secondary educational attainment from Lutz et al. (2007);
+        \item Latitude in absolute value;
+        \item Polity 2 indicator from the Polity IV database.
+    \end{itemize}
+    \item Data on natural disasters, their human and economic impacts from the EM-DAT 
+    database collected by the Centre for Research on the Epidemiology of Disasters (CRED). 
+    This database has information on natural disasters from 1900 at the condition that 
+    at least 10 or more people have died, 100 people have been affected, a state of 
+    emergency is declared or international assistance is called for. It provides two measures 
+    of the magnitude of a disaster: number of people killed and amount of direct damage in 
+    US dollars.
+     
+\end{itemize}
+
+The authors only focus on large disasters, defined as exceeding the cutoffs of 99th, 90th 
+and 75th percentiles of the world distribution of number of people killed. The 99th percentile 
+corresponds to more than 233 deaths per 1 million inhabitants, the 90th to 17 deaths per 1 
+million, and the 75th to 7 deaths per 1 million (the mortality of Hurricane Katrina in 2005).
+Using these cutoffs, the subsample of diasters happening before 2000 with full data are of 4 
+events for the 99th percentile cutoff, 18 for the 90th percentile and 22 for the 74th percentile.
+
+
+\subsubsection*{Results}
+Findings show statistically significant and negative effects of very large natural disasters 
+on GDP growth for both the short and long term. 
+Of the four very large disaster (99th percentile cutoff), the 1979 Islamic Iranian Revolution 
+after the 1978 earthquake and the Sandinista Nicaraguan Revolution of 1979 that followed an 
+earthquake were followed by political revolutions.
+When controlling for political upheaval, the significance disappears. This dynamic is reminiscent 
+of Acemoglu, Johnson and Robinson's (2005) work on the significance of institutions as a 
+determinant of economic growth.
+For countries unaffected by revolutions and/or milder natural events, the effect of disasters 
+is not significant. 
+
+As noted in Section 2.4, the interpretation of SCM as causal rests on the assumption that 
+countries from the donor pool are unaffected both directly and indirectly by the treatment for 
+unit $J=1$. It is very hard to rule out this type of interaction if the donor pool has relations 
+with the treated unit, so the authors check that the control group is not affected by the 
+presence of a main trading partner.
+
+
+
+\subsection{Barone, Mocetti (2014) on growth and institutions after earthquakes in Italy}
+Barone and Mocetti essentially apply Cavallo's et al. (2013) approach to the case of two 
+earthquakes in Italy, with the stated advantage that they can exactly pinpoint the geographical 
+areas affected by the events instead of considering an entire country as impacted. 
+A second advantage comes from the better comparability of Italian 
+regions rather than comparing different countries. Third, they use data that is uniformly built 
+since it comes from the same institutional sources. Finally, they can control for the amount of 
+public transfers to each region, which play a crucial role in the long term consequences of 
+natural disasters depending on whether these resources are misallocated or used to enchance the 
+local economy.
+
+\subsubsection*{Strategy}
+The empirical strategy is the one from Abadie et al. (2010) applied to $J+1$ Italian regions, of 
+which the first unit is the treated one. 
+Weights $W$ are chosen to minimize the MSPE function. 
+
+
+
+\subsubsection*{Data}
+Data for the main outcome variable GDP per capita and a 
+number of predictors (labor units, invesments, population, sectoral shares of value added) comes 
+from the CRENOS research institute and covers the 1951-2004 period. Then, the same data for 
+2004-2009 comes from the National Statistical Institute (ISTAT). Human capital data comes from 
+ISTAT's census information.
+
+The authors build four regional time-varying variables to control for the quality of 
+local institutions. The first uses ISTAT data on embezzlement, bribery, corruption, infringement 
+of public duty, fraud, fencing and bankruptcies to measure the intensity of corruption and 
+fraudulent behavior. Then, using data from Fondazione Rodolfo de Benedetti, they build the fraction 
+of national memebers of parliament appointed in each region who were involved in scandals. 
+The third variables captured political participation by using referenda and European election 
+turnout for each region. The final one is the diffusion of newspaper readership using data 
+from Accertamenti Diffusione Stampa (ADS).
+
+Data on the number of deaths and affected people comes from the aforementioned EM-DAT. The 
+first earthquake in the Friuli region affected killed 922 and 218,200 people, the second one 
+in Irpinia (Campania and Basilicata regions) affected 407,700 and killed 4689.
+
+\subsubsection*{Results}
+The method attaches sparse weights to a small number of donor pool regions in both cases, as usual.
+The main results are the absence of a significant short term shock. Accounting for fiscal stimulus 
+in the form of financial aid highlights that it represented a sizeable chunk of regional GDP, so much 
+so that without financial aid, in the five years following the disasters, Friuli's GDP per capita would 
+have been 2-4\% lower and Irpinia's would have been 6-11\% lower. However, in the long term the synthetic 
+control detects two divergent trends of GDP per capita in the two regions. This can be reconnected to 
+the quality of institutions and the consequent use of financial aid resources, with Friuli steering 
+toward virtuous reconstruction, and Irpinia experiencing more rent seeking behaviors and misallocation 
+of resources.  
+
+Financial aid designed in a way that is conscious of the institutional quality and local dynamics 
+favours immediate reconstruction and cushions the negative effects on GDP.
+
+
+
+\subsection{Coffman, Noy (2011) on measuring the long term impact of Hurricane Iniki}
+Coffman and Noy study the long term impact of the 1992 category 4 hurricane Iniki on 
+the Hawaian county of Kauai, using the unaffected islands as a donor pool to build 
+a synthetic control. 
+What makes the counties ideal candidates for the application of SCM is that they share 
+similar economic structures, are affected by common shocks, they belong to the same 
+state and thus share institutions and legal frameworks. 
+Differences between the counties are mostly in terms of size.
+At the time of publication, Iniki was the strongest hurricane to hit Hawaii in recorded 
+history causing \$7.4 billion of direct damages at 2008 prices.
+
+\subsubsection*{Strategy}
+The SCM is applied as in Abadie et al. (2010) with regression methods. %finish this
+To account for potential indirect effects of Iniki on the economic activity of other 
+counties, Maui was excluded from the donor pool. This is due to tourism being the 
+main economic activity of all islands and to Maui temporarily absorbing arrivals to 
+the Kauai county right after the hurricane hit. 
+Another channel for indirect effects could be that of displacement of residents to 
+other islands, however data shows this is not an issue. 
+
+\subsubsection*{Data}
+Data is collected from 1975 to 2011, and inlcudes information on employment, resident 
+population, personal income, per capita income and transfer payments.  
+Once again, data on deaths (4) and affected people (25,000) comes from the EM-DAT 
+database.
+
+\subsubsection*{Results}
+Placebo testing confirms two central results. 
+First, Kauai's population trajectory took a hit following the hurricane, and kept 
+growing slowly in the following years, with a permanent loss of 12\% of its population.
+Second, private sector employment also declined significantly, with a permanent loss 
+of around 15\% of the total county employment. 
 
 
 
 
+\section{Applying SCM to policy evaluation}
+This section is dedicated to a literature review focused on policy evaluation related 
+to emissions, international agreements and event studies. Analogously to the previous 
+section, I will focus on strategy, data sources and results for each work. 
 
 
+\subsection{Cole, Elliott, Liu (2020) on the impact of lockdowns on Wuhan air pollution and health}
+This paper by Cole et al. applies a combination of machine learning 
+to clean weather data and a variation of SCM called augmented SCM to study the effect 
+of reduced air pollution during lockdown on health. 
+Improvements in air quality and associated health benefits are critical points in 
+elaborating climate change related policy and emissions regulation. 
+
+
+\subsubsection*{Strategy} %complete
+Since concentrations of pollutants depend on local weather conditions, the comparison 
+of emissions across time is difficult. As a solution, the authors adopt a machine 
+learning approach that allows to remove the effect of weather conditions on concentrations 
+of pollutants. 
+The city of Wuhan is one of 17 large cities in its province of Hubei (China), and it 
+implemented a lockdown at least two weeks in advance with respect to other cities. 
+
+\subsubsection*{Data}
+The Qingyue Open Environmental Data Center provides data on sulphur dioxide (SO$_2$), 
+nitrogen dioxide (NO$_2$), carbon monoxide (CO) and particulate matter (PM10) between 
+January 2013 and February 2020 for thirty Chinese cities. 
+
+\subsubsection*{Results}
+
+
+
+\subsection{Steinkraus (2018)}
+Text
+
+\subsubsection*{Strategy}
+\subsubsection*{Data}
+\subsubsection*{Results}
+
+
+
+\subsection{Andersson (2019)}
+Text
+
+\subsubsection*{Strategy}
+\subsubsection*{Data}
+\subsubsection*{Results}
+
+
+
+\subsection{Maamoun (2019)}
+Text
+
+\subsubsection*{Strategy}
+\subsubsection*{Data}
+\subsubsection*{Results}
+
+
+
+\subsection{He et al. (2022)}
+Text
+
+\subsubsection*{Strategy}
+\subsubsection*{Data}
+\subsubsection*{Results}
 
 
 
@@ -610,30 +825,16 @@ the outcomes.
 
 
 
-
-
-
-\section{Data sourcing and explanations}
-\textcolor{red}{Lorem ipsum}
-
-
-
-
-
-
-
-
-
 \section{Conclusion}
 \textcolor{red}{Lorem ipsum}
 
 
-
-
-
-
-
 \newpage
+
+
+
+
+
 \section{References}
 \begin{itemize}
     \item Abadie, Alberto, Alexis Diamond, and Jens Hainmueller. ``Synthetic control methods for comparative case studies: Estimating the effect of California's tobacco control program." Journal of the American statistical Association 105.490 (2010): 493-505.
@@ -641,10 +842,13 @@ the outcomes.
     \item Abadie, Alberto. ``Using synthetic controls: Feasibility, data requirements, and methodological aspects." Journal of Economic Literature 59.2 (2021): 391-425.
     \item Abadie, Alberto, and Jérémy L'hour. ``A penalized synthetic control estimator for disaggregated data." Journal of the American Statistical Association 116.536 (2021): 1817-1834.
     \item Acemoglu, Daron, et al. ``The value of connections in turbulent times: Evidence from the United States." Journal of Financial Economics 121.2 (2016): 368-391.
+    \item Acemoglu, Daron, Simon Johnson, and James A. Robinson. ``Institutions as a fundamental cause of long-run growth." Handbook of economic growth 1 (2005): 385-472.
     \item Athey, Susan, and Guido W. Imbens. ``The state of applied econometrics: Causality and policy evaluation." Journal of Economic perspectives 31.2 (2017): 3-32.
     \item Barone, Guglielmo, and Sauro Mocetti. ``Natural disasters, growth and institutions: a tale of two earthquakes." Journal of Urban Economics 84 (2014): 52-66.
+    \item Ben-Michael, Eli, Avi Feller, and Jesse Rothstein. ``The augmented synthetic control method." Journal of the American Statistical Association 116.536 (2021): 1789-1803.
     \item Cavallo, Eduardo, et al. ``Catastrophic natural disasters and economic growth." Review of Economics and Statistics 95.5 (2013): 1549-1561.
     \item Coffman, Makena, and Ilan Noy. ``Hurricane Iniki: measuring the long-term economic impact of a natural disaster using synthetic control." Environment and Development Economics 17.2 (2012): 187-205.
+    \item Cole, Matthew A., Robert JR Elliott, and Bowen Liu. ``The impact of the Wuhan Covid-19 lockdown on air pollution and health: a machine learning and augmented synthetic control approach." Environmental and Resource Economics 76.4 (2020): 553-580.
     \item Doudchenko, Nikolay, and Guido W. Imbens. ``Balancing, regression, difference-in-differences and synthetic control methods: A synthesis." No. w22791. National Bureau of Economic Research, 2016.
     \item Dube, Arindrajit, and Ben Zipperer. ``Pooling multiple case studies using synthetic controls: An application to minimum wage policies." (2015).
     \item Donohue, John J., Abhay Aneja, and Kyle D. Weber. ``Right-to-carry laws and violent crime: A comprehensive assessment using panel data and a state‐level synthetic control analysis." Journal of Empirical Legal Studies 16.2 (2019): 198-247.
