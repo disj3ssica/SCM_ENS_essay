@@ -20,10 +20,10 @@
 \contentsline {subsection}{\numberline {4.3}Coffman, Noy (2011) on measuring the long term impact of Hurricane Iniki}{17}{}%
 \contentsline {section}{\numberline {5}Applying SCM to policy evaluation}{18}{}%
 \contentsline {subsection}{\numberline {5.1}Cole, Elliott, Liu (2020) on the impact of lockdowns on Wuhan air pollution and health}{18}{}%
-\contentsline {subsection}{\numberline {5.2}Steinkraus (2018)}{19}{}%
-\contentsline {subsection}{\numberline {5.3}Andersson (2019)}{19}{}%
-\contentsline {subsection}{\numberline {5.4}Maamoun (2019)}{19}{}%
-\contentsline {subsection}{\numberline {5.5}He et al. (2022)}{20}{}%
-\contentsline {section}{\numberline {6}Potential applications to Fleurbeay project}{20}{}%
-\contentsline {section}{\numberline {7}Conclusion}{20}{}%
-\contentsline {section}{\numberline {8}References}{21}{}%
+\contentsline {subsection}{\numberline {5.2}Steinkraus (2018) on the green paradox}{20}{}%
+\contentsline {subsection}{\numberline {5.3}Andersson (2019) on the study of carbon taxes and CO$_2$ emissions}{21}{}%
+\contentsline {subsection}{\numberline {5.4}Maamoun (2019) on empirical evidence of the Kyoto Protocol success}{23}{}%
+\contentsline {subsection}{\numberline {5.5}He et al. (2022)}{23}{}%
+\contentsline {section}{\numberline {6}Potential applications to Fleurbeay project}{23}{}%
+\contentsline {section}{\numberline {7}Conclusion}{23}{}%
+\contentsline {section}{\numberline {8}References}{24}{}%

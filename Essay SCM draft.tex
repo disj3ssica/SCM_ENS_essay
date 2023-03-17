@@ -45,7 +45,8 @@ policy evaluation literature in the last 15 years".
 
 
 
-\section{Synthetic Control Methods}
+
+\section{Synthetic Control Methods}  % INFERENCE
 
 Synthetic Control Methods (SCM) have been originally proposed in Abadie and Gardeazabal 
 (2003) and by Abadie et al. (2010) to estimate the effects of aggregate interventions.
@@ -226,7 +227,7 @@ estimator is unbiased.
 
 
 \subsubsection{Inference and robustness checks in SCM}
-\textcolor{red}{Talk about placebo studies and robustness checks. Check Barone Mocetti} %complete
+\textcolor{red}{Talk about placebo studies and robustness checks. Check Barone Mocetti, check Steinkraus 2018 part on inference} %complete
 
 
 
@@ -316,7 +317,6 @@ predictive ability of the synthetic unit.
 
 Extensive post-treatment information is crucial for the evaluation of the effects, 
 especially if they are expected to intensify or dissipate over time.
-
 
 
 
@@ -570,9 +570,6 @@ competitively with respect to other methods.
 
 
 
-
-
-
 \section{Applying SCM to the analysis of extreme natural events}
 Synthetic control methods have been applied to the study of right-to-carry laws, 
 legalized prostitution, immigration policy, corporate connections, minimum wages and 
@@ -766,46 +763,170 @@ elaborating climate change related policy and emissions regulation.
 
 
 \subsubsection*{Strategy} %complete
-Since concentrations of pollutants depend on local weather conditions, the comparison 
-of emissions across time is difficult. As a solution, the authors adopt a machine 
-learning approach that allows to remove the effect of weather conditions on concentrations 
-of pollutants. 
 The city of Wuhan is one of 17 large cities in its province of Hubei (China), and it 
 implemented a lockdown at least two weeks in advance with respect to other cities. 
+
+The authors adopt a machine learning approach that allows to remove the effect of 
+weather conditions on concentrations of pollutants. 
+Weather normalisation has two advantages, the first being that it allows
+to account for local meterological conditions since they affect pollution 
+concentration. A second advantage is the reduced volatility in the outcome variable, 
+a prerequisite for successful application of the SCM.
+
+Traditional econometric approaches are unsuitable for this task
+because pollutant concentration depends on local weather conditions. 
+Instead, according to the authors random forest machine learning techniques are 
+the better option, applied by combining the work from Grange et al. (2018) and Vu et 
+al. (2019).
+
+Once weather is normalized, the augmented SCM (ASCM) is used to compute synthetic 
+values for pollutants concentration in Wuhan, had the lockdown not taken place. The 
+advantage of ASCM over regular SCM is that it extends the method to cases where 
+the pre-treatment fit would not be good enough to proceed. The Ben-Michael et al. (2019) 
+approach allows for negative weights and improves the pre-intervention fit compared to 
+SCM alone and penalizes for potential extrapolation. 
+
+The analysis spans for 30 days pre-treatment, and for around 12 days starting from 
+January 21st when a clear drop in emission manifests itself. 
+The authors exclude anticipation effects as backdating the treatment does not affect 
+results. 
+
+The impacts on mortality are computed considering only NO$_2$ and the related health 
+damages literature. The outcome is a significant reduction in mortality. 
+
 
 \subsubsection*{Data}
 The Qingyue Open Environmental Data Center provides data on sulphur dioxide (SO$_2$), 
 nitrogen dioxide (NO$_2$), carbon monoxide (CO) and particulate matter (PM10) between 
-January 2013 and February 2020 for thirty Chinese cities. 
+January 2013 and February 2020 for thirty Chinese cities. Information on 
+meterological data (temperature, relative humidity, wind direction, wind speed and 
+pressure) comes from the ``worldmet" R package (https://www.ncdc.noaa.gov/isd).
 
 \subsubsection*{Results}
+Concentrations of NO$_2$ fell significantly during the period, while the fall in 
+concentration of PM10 was not statistically significant. Concentrations of SO$_2$ 
+did not fall, likely due to coal reliance for domestic heating during 
+winter, as well as CO. 
+The findings on reduced mortality show a rough estimate of 496 prevented deaths in 
+Wuhan, 3368 prevented deaths in Hubei and 10,822 in China.
+
+Overall, this paper sheds light on how measures such as pedestrian zones, congestion 
+charging and urban planning could benefit public health. It also shows how SCM may 
+be combined with other methods to estimate the effect of climate impacting policies.
 
 
+\subsection{Steinkraus (2018) on the green paradox}
+Steinkraus applies the SCM to the empirical study of the green paradox by analysing the coal 
+production of four US states (Kentucky, Montana, Pennsylvania, Virginia) that enacted a 
+greenhouse gas plan. 
+The green paradox refers to the potential unwanted worsening of global warming as a 
+response to climate policy intended to curb it. 
+This might happen when plans do not take supply-side behavior into 
+account, leading to a reduction in demand for fossil fuels that does not affect the supply, 
+or generating unwanted behavior such as pushing for faster extraction before the policy 
+becomes effective. 
 
-\subsection{Steinkraus (2018)}
-Text
+
 
 \subsubsection*{Strategy}
+A counterfactual of coal production is computed for each treated state and used to 
+estimate the causal impact on coal production of the plan taking effect. 
+The donor pool is comprised of 16 states (Alabama, Georgia, Idaho, Indiana, Kansas, 
+Louisiana, Mississipi, Nebraska, North Dakota, Ohio, Oklahoma, South Dakota, Tennessee, 
+Texas, West Virginia and Wyoming) that did not announce or enact any plan for 
+greenhouse gas emissions.
+
+In light of Kaul et al. (2015) the author includes only coal production data at two 
+points in time (1990 and the pre-treatment year).
+
+
 \subsubsection*{Data}
+Data on total tons of coal produced comes from the US Energy Information Administration 
+(EIA) for the period covering 1983 to 2014. In addition to that, additional predictor 
+variables on total state-level energy production, total state-level energy consumption 
+and renewable energy production is retrieved from the EIA State Energy Data System. 
+Data on population density comes from US census data. 
+In order to control for extraction capability, data for the amount of recoverable 
+reserves is added as a predictor (from Höök and Aleklett (2009)). Additionally, data on 
+GDP comes from the Bureau of Economic Analysis. 
+Finally, in order to control for trade openness, data on foreign distribution of coal 
+production as reported by EIA Annual Coal Distribution Report is added, as well as data 
+from the Seamless Digital Chart of the World and from the Global Administrative Areas 
+Project used to compute the average distance from the coast of the states. 
+
 \subsubsection*{Results}
+Findings show that while Pennsylvania, Virginia and Kentucky have not experienced an 
+increase in coal production, Montana actually experienced a positive and significant 
+jump in production as a response. 
+However, this might be due to the state being the most likely to experience the 
+legislation as an exogenous shock for political reasons and lack of previous ainterventions 
+on the topic. Montana also has a longer border that allowed for export to unaffected 
+states.
+ 
+Due to mixed results, the author concludes that state by state reactions are very case 
+dependent and point to a need to consider the supply side when constructing legislation.
 
 
-
-\subsection{Andersson (2019)}
-Text
+\subsection{Andersson (2019) on the study of carbon taxes and CO$_2$ emissions}
+Andersson explores the causality of the link between carbon taxes and emission by analysing 
+the introduction of a carbon tax and a value added tax on transport fuel in 1991 Sweden. 
+The carbon tax mainly affects the transport sector, which is Sweden's main source of 
+CO$_2$ emissions. For this reason, the analysis focuses on this sector.
 
 \subsubsection*{Strategy}
+The first part of the paper is dedicated to the construction via SCM of a counterfactual 
+Sweden from a donor pool of 14 countries. Since Sweden was one of the first countries 
+in the world to implement such taxation, with the exlicit aim of preventing climate change, 
+it represents an ideal candidate for the method.
+The second half of the paper computes tax and price elasticites of the demand for gas fuel 
+in order to distinguish between the carbon tax and the value added tax effects. 
+
+The author applies the method as in Abadie et al. (2010) via joint optimization of W and V 
+in order to minimize the MSPE of the outcome variable over the pre-treatment period.  
+
+
 \subsubsection*{Data}
+The World Bank provided panel data on per capita CO$_2$ emissions for the transport sector 
+of 25 OECD countries, by source (road, rail, domestic navigation, domestic aviation). 
+Data on transport emissions is gathered from national statistical agencies and includes 
+all transport fuels in order to capture changes in demand and substitutions between fuels 
+(mainly between gasoline and diesel). The dataset covers the period from 1960 to 2005, when 
+the EU implemented the European Unioni Emissions Trading System. Thus, there are 30 years 
+before treatment and 16 years post treatment.
+Of the 25 aforementioned countries, those that enacted carbon taxes that touched the 
+transport sector, made large changes in fuel taxation, or are known for fuel tourism were 
+ecluded from the dataset.
+
+Data on predictors GDP per capita, number of motor vehicles, per capita gasoline consumption 
+and percentage of population residing in urban areas comes from the World Bank and the works 
+of Feenstra, Inklaar and Timmer (2013) and Dargay, Gately and Sommer (2007). Additional 
+predictors are lagged values of CO$_2$ emissions for 1970, 1980, 1989.
+
 \subsubsection*{Results}
+An analysis of differences between Sweden and the other OECD countries shows that 
+until 1980 growth of emissions was similar, but between 1980 and 1989 emissions in Sweden 
+grew twice as fast. This would have led to distorted results if a method such as 
+difference-in-differences (DiD) were applied instead of SCM due to a violation of the 
+parallel trend assumption.
+
+Comparing real Sweden with synthetic Sweden shows that the average emission reduction for 
+the 1990-2005 period is of 10.9\% (2.5M metric tons) for the transport sector. Of this, 
+3.6\% alone can be attributed to the carbon tax.
 
 
+\subsection{Maamoun (2019) on empirical evidence of the Kyoto Protocol success}
 
-\subsection{Maamoun (2019)}
-Text
+
 
 \subsubsection*{Strategy}
+
+
 \subsubsection*{Data}
+
+
 \subsubsection*{Results}
+
+
 
 
 
@@ -849,11 +970,16 @@ Text
     \item Cavallo, Eduardo, et al. ``Catastrophic natural disasters and economic growth." Review of Economics and Statistics 95.5 (2013): 1549-1561.
     \item Coffman, Makena, and Ilan Noy. ``Hurricane Iniki: measuring the long-term economic impact of a natural disaster using synthetic control." Environment and Development Economics 17.2 (2012): 187-205.
     \item Cole, Matthew A., Robert JR Elliott, and Bowen Liu. ``The impact of the Wuhan Covid-19 lockdown on air pollution and health: a machine learning and augmented synthetic control approach." Environmental and Resource Economics 76.4 (2020): 553-580.
+    \item Dargay, Joyce, Dermot Gately, and Martin Sommer. ``Vehicle ownership and income growth, worldwide: 1960-2030." The energy journal 28.4 (2007).
     \item Doudchenko, Nikolay, and Guido W. Imbens. ``Balancing, regression, difference-in-differences and synthetic control methods: A synthesis." No. w22791. National Bureau of Economic Research, 2016.
     \item Dube, Arindrajit, and Ben Zipperer. ``Pooling multiple case studies using synthetic controls: An application to minimum wage policies." (2015).
     \item Donohue, John J., Abhay Aneja, and Kyle D. Weber. ``Right-to-carry laws and violent crime: A comprehensive assessment using panel data and a state‐level synthetic control analysis." Journal of Empirical Legal Studies 16.2 (2019): 198-247.
+    \item Feenstra, Robert C., Robert Inklaar, and Marcel P. Timmer. ``The next generation of the Penn World Table." American economic review 105.10 (2015): 3150-3182.
+    \item Grange, Stuart K., et al. ``Random forest meteorological normalisation models for Swiss PM 10 trend analysis." Atmospheric Chemistry and Physics 18.9 (2018): 6223-6239.
+    \item Höök, Mikael, Robert Hirsch, and Kjell Aleklett. ``Giant oil field decline rates and their influence on world oil production." Energy policy 37.6 (2009): 2262-2272.
     \item Luo, Kevin, and Tomoko Kinugasa. ``Do natural disasters influence long-term savings?: Assessing the impact of the 2008 Sichuan earthquake on household saving rates using synthetic control." China: An International Journal 18.3 (2020): 59-81.
     \item Malo, Pekka, et al. ``Computing Synthetic Controls Using Bilevel Optimization." (2020).
+    \item Vu, Tuan V., et al. ``Assessing the impact of clean air action on air quality trends in Beijing using a machine learning technique." Atmospheric Chemistry and Physics 19.17 (2019): 11303-11314.
     \item Kaul, Ashok, et al. ``Synthetic control methods: Never use all pre-intervention outcomes together with covariates." (2015).
     \item Klößner, Stefan, et al. ``Comparative politics and the synthetic control method revisited: A note on Abadie et al.(2015)." Swiss journal of economics and statistics 154 (2018): 1-11.
     \item Klößner, Stefan, and Gregor Pfeifer. ``Outside the box: Using synthetic control methods as a forecasting technique." Applied Economics Letters 25.9 (2018): 615-618.
