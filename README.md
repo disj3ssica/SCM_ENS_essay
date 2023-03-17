@@ -7,7 +7,7 @@ If you just want to read the essay you should download the definitive .pdf file.
 ## How is this organized?
 The "Papers" folder contains the main papers used to write the essay, roughly organised in sub-folders that resemble the chapters of the essay itself. Most of them are also annotated. There are some extra random papers in there that are off topic. 
 
-## How to use work on this on any device and sync changes?
+## How to work on this on any device and sync changes?
 
 To access a directory via VS Code on multiple devices, you can use a version control system such as Git to synchronize your codebase across your devices. Here are the general steps:
 
