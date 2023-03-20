@@ -219,15 +219,26 @@ scenario can be constrained by a function that goes to zero as the amount of
 pre-treatment periods increases. In an VAR scenario, the synthetic control 
 estimator is unbiased.
 
-\textcolor{red}{maybe add something more detailed if you have time} %add more
-
-
 
 
 
 
 \subsubsection{Inference and robustness checks in SCM}
 \textcolor{red}{Talk about placebo studies and robustness checks. Check Barone Mocetti, check Steinkraus 2018 part on inference} %complete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -748,7 +759,7 @@ of around 15\% of the total county employment.
 
 
 
-\section{Applying SCM to policy evaluation}
+\section{Applying SCM to evaluate environmental policy}
 This section is dedicated to a literature review focused on policy evaluation related 
 to emissions, international agreements and event studies. Analogously to the previous 
 section, I will focus on strategy, data sources and results for each work. 
@@ -914,28 +925,134 @@ the 1990-2005 period is of 10.9\% (2.5M metric tons) for the transport sector. O
 3.6\% alone can be attributed to the carbon tax.
 
 
-\subsection{Maamoun (2019) on empirical evidence of the Kyoto Protocol success}
+\subsection{Maamoun (2019) on empirical evidence of the success of the Kyoto Protocol}
+Maamoun studies the empirical impact of the Kyoto Protocol (KP) via generalized SCM (GSCM) 
+on ratifying countries' emissions. 
+The KP rested on the principle of ``common but differentiated responsibilities" and posed 
+legally binding targets to its Annex B countries (industrialized countries) which were 
+mandated to reduce their emissions by 5.2\% on average with respect to base year 1990 
+during the first commitment period 2008-2012. 
+Annex B includes 36 countries out of a total 192 ratifying countries, and between those 
+34 represent the treated group, while 2 are excluded for lack of proper data (Monaco and 
+Liechtenstein).
 
+The KP was greatly criticized and empirical evidence using regression methods and DiD, DiD with 
+matching to solve the lack of parallel trend and game theory models yield different conclusions 
+on its effectiveness in reducing greenhouse gas and CO$_2$ emissions. Furthermore, 
+regression methods are affected by selection bias due to the voluntary nature of the KP 
+agreement, and other endogeneity concerns. GSCM offers the possibility to apply SCM to the case 
+of multiple treated units to compute a more accurate counterfactual for the treated group. 
 
 
 \subsubsection*{Strategy}
+GSCM improves upon regular SCM by combining it with interactive fixed effects model (IFE). It 
+allows for multiple treated unit and different treatment periods. It also provides standard errors 
+and confidence intervals, which improves interpretability. Overall, GSCM is preferable to SCM 
+in this context, and preferable to DiD when the parallel trend assumption might not be respected. 
+For a detailed introduction of GSCM see Xu (2017).
+
+The main limitations of GSCM are that it is biased if the pre-treatment period has less than 10 
+observations and the control group is less than 40 units large. In this case, the method can be 
+applied since the control group is 119 countries and the pre-treatment period spans more than 10 
+years. A second limitation is that complex data generating processes should not be used, for instance 
+there should not be structural breaks, or a dynamic relation between treatment and outcome variable, 
+and it is not suited for different treatment intensities. 
+Finally, differently from regular SCM, specification plays an important role.
+
+The treated group is composed of the 34 Annex B countries for which necessary data is available. 
+The computed counterfactual would represent the business as usual (BAU) scenario. 
 
 
 \subsubsection*{Data}
-
+The dataset covers the 1995-2012 period, with the treatment period starting in 2005 (enforcement 
+period) rather than 2008 (commitment period). The output variable is greenhouse gas (GHG) excluding 
+land use and forestry, gathered from the World Resources Institute's (WRI) CAIT Climate Data Explorer. 
+Three control variables from the World Bank's World Development Indicators are included: real GDP 
+per capita, squared real GDP per capita and population size.
 
 \subsubsection*{Results}
+According to results, the KP successfully reduced GHG emissions for the industrialized countries by 
+an estimated 6.8\% with respect to the BAU counterfactual scenario. Removing EU countries from the 
+treated group as a robustness exercise shows that the KP is still effective at reducing emissions, 
+although significance decreases slightly.
 
+The KP assignes ``Hot Air" amounts of emissions that could exceed the BAU levels without violating 
+the protocol. This measure was greatly crticized due to concerns that it would remove the incentive 
+to decrease emissions. If we remove the Former Soviet Union countries from the analysis, who were 
+allocated more emissions than their BAU levels, the magnitude of reduction reaches 17\%. This is in 
+line with criticism that the extra emissions allowances did not push for a decrease in emissions at 
+best, and incentivised an increase at worst. 
 
-
+To alleviate the selection bias for Annex B countries who would be the ones legally bound by the 
+agreement, the author uses the US as a control group for industrialized countries. Results are still 
+significant and of similar magnitude.
 
 
 \subsection{He et al. (2022)}
-Text
+This study uses SCM to analyse the effect of China's free trade zones (FTZ) policy 
+launched in 2013 in Shanghai and in 2015 in Tianjin, Guangdong and Fujian to 
+understand its impact on CO$_2$ emissions. 
+FTZ consist in areas where policy is implemented to promote trade openness. 
+For instance, they introduced free entry and exit of goods, zero-tariff areas, the 
+acceleration of government functions, incentives to apply innovative management models, 
+promote investments an more. They are specifically targeted at the service and 
+finance sectors (banking, insurance, capital markets). 
+FTZ can reduce emissions if they improve efficiency in allocation 
+of environment resources and boost eco-friendly technologies. They might increase 
+emissions if they attract high emission goods production.
+
+The FTZ policy also included environmental quality suggestions to improve energy 
+efficiency and reduce GHG and other pollutants emissions. 
 
 \subsubsection*{Strategy}
+The authors use the creation of the first FTZ in Shanghai as the start of treatment 
+and build a synthetic Shanghai to measure the impact of the policy on CO$_2$ 
+emissions. They apply the SCM as in Abadie et al. (2010) to construct a synthetic 
+counterfactual unit based on CO$_2$ emissions from a donor pool of provinces 
+where FTZ were not established. 
+
+The same analysis is done for the provinces of Tianjin, Fujian and Guangdong 
+which established FTZ in 2015. Eventually, the provinces of Liaoning, 
+Zhejiang, Henan, Hubei, Chongqing, Sichuan and Shaanxi implemented FTZ in 2017.
+When computing synthetic Shanghai, these provinces are excluded from the donor 
+pool to avoid anticipatory effects on their emissions.
+
+Note that the authors do not state whether they investigated other emission 
+impacting policies that may have been active in the donor pool provinces 
+during the training period. If such policy was implemented, the province should 
+have been excluded from the donors. 
+
+
 \subsubsection*{Data}
+It is notable that the authors do not employ data on CO$_2$ emissions from the 
+Intergovernmental Panel on Climate Change (IPCC), notwithstanding this being the 
+standard practice in the literature. Instead, they choose to use the official 
+figures released by the China Emissions Accounts and Datasets (CEAD) stating that 
+it has ``a more comprehensive accounting range", without claryifing details on the 
+discrepancies between the accounting choices of the two sources. CEAD provides 
+overall lower figures for emissions than those from the IPCC, with an approximate 
+8\% discrepancy in 2012, but it does provide data at the provincial level, which is 
+not easily retrievable from the IPCC dataset.  
+
+The dataset covers 30 provinces for the period 1997-2017. From the China Statistical 
+Yearbook and the China Energy Statistical Yearbook the authors gather data on 
+output per capita, industrial structure, developmente level of service industry, 
+industrial structure upgrading, energy efficiency, population density, technology 
+market turnover and total fossil energy consumption. 
+
+
+
 \subsubsection*{Results}
+Looking at the synthetic Shanghai computed with the exclusion of the 2015 and 2017 
+FTZ provinces, they find a 10\% reduction in CO$_2$ emissions from treatment. 
+The same analysis is done for the provinces of Tianjin and Fujian, whose synthetic 
+counterpart suggests a reduction in emissions post treatment, and for Guangdong, 
+for which the discrepancy is not as marked nor consistent. 
+The difference in results may be due to Shanghai being in many ways the cultural, 
+technological and productive center of China, therefore it may be more responsive 
+than other provinces to policy of this kind. 
+
+
 
 
 
@@ -950,20 +1067,28 @@ Text
 \textcolor{red}{Lorem ipsum}
 
 
+
+
+
+
+
+
+
+
+
 \newpage
 
 
 
-
-
 \section{References}
-\begin{itemize}
+\begin{enumerate}
     \item Abadie, Alberto, Alexis Diamond, and Jens Hainmueller. ``Synthetic control methods for comparative case studies: Estimating the effect of California's tobacco control program." Journal of the American statistical Association 105.490 (2010): 493-505.
     \item Abadie, Alberto, and Javier Gardeazabal. ``The economic costs of conflict: A case study of the Basque Country." American economic review 93.1 (2003): 113-132.
-    \item Abadie, Alberto. ``Using synthetic controls: Feasibility, data requirements, and methodological aspects." Journal of Economic Literature 59.2 (2021): 391-425.
     \item Abadie, Alberto, and Jérémy L'hour. ``A penalized synthetic control estimator for disaggregated data." Journal of the American Statistical Association 116.536 (2021): 1817-1834.
+    \item Abadie, Alberto. ``Using synthetic controls: Feasibility, data requirements, and methodological aspects." Journal of Economic Literature 59.2 (2021): 391-425.
     \item Acemoglu, Daron, et al. ``The value of connections in turbulent times: Evidence from the United States." Journal of Financial Economics 121.2 (2016): 368-391.
     \item Acemoglu, Daron, Simon Johnson, and James A. Robinson. ``Institutions as a fundamental cause of long-run growth." Handbook of economic growth 1 (2005): 385-472.
+    \item Andersson, Julius J. ``Carbon taxes and CO 2 emissions: Sweden as a case study." American Economic Journal: Economic Policy 11.4 (2019): 1-30.
     \item Athey, Susan, and Guido W. Imbens. ``The state of applied econometrics: Causality and policy evaluation." Journal of Economic perspectives 31.2 (2017): 3-32.
     \item Barone, Guglielmo, and Sauro Mocetti. ``Natural disasters, growth and institutions: a tale of two earthquakes." Journal of Urban Economics 84 (2014): 52-66.
     \item Ben-Michael, Eli, Avi Feller, and Jesse Rothstein. ``The augmented synthetic control method." Journal of the American Statistical Association 116.536 (2021): 1789-1803.
@@ -971,19 +1096,23 @@ Text
     \item Coffman, Makena, and Ilan Noy. ``Hurricane Iniki: measuring the long-term economic impact of a natural disaster using synthetic control." Environment and Development Economics 17.2 (2012): 187-205.
     \item Cole, Matthew A., Robert JR Elliott, and Bowen Liu. ``The impact of the Wuhan Covid-19 lockdown on air pollution and health: a machine learning and augmented synthetic control approach." Environmental and Resource Economics 76.4 (2020): 553-580.
     \item Dargay, Joyce, Dermot Gately, and Martin Sommer. ``Vehicle ownership and income growth, worldwide: 1960-2030." The energy journal 28.4 (2007).
+    \item Donohue, John J., Abhay Aneja, and Kyle D. Weber. ``Right-to-carry laws and violent crime: A comprehensive assessment using panel data and a state‐level synthetic control analysis." Journal of Empirical Legal Studies 16.2 (2019): 198-247.
     \item Doudchenko, Nikolay, and Guido W. Imbens. ``Balancing, regression, difference-in-differences and synthetic control methods: A synthesis." No. w22791. National Bureau of Economic Research, 2016.
     \item Dube, Arindrajit, and Ben Zipperer. ``Pooling multiple case studies using synthetic controls: An application to minimum wage policies." (2015).
-    \item Donohue, John J., Abhay Aneja, and Kyle D. Weber. ``Right-to-carry laws and violent crime: A comprehensive assessment using panel data and a state‐level synthetic control analysis." Journal of Empirical Legal Studies 16.2 (2019): 198-247.
     \item Feenstra, Robert C., Robert Inklaar, and Marcel P. Timmer. ``The next generation of the Penn World Table." American economic review 105.10 (2015): 3150-3182.
     \item Grange, Stuart K., et al. ``Random forest meteorological normalisation models for Swiss PM 10 trend analysis." Atmospheric Chemistry and Physics 18.9 (2018): 6223-6239.
+    \item He, Lingyun, et al. ``Free Trade Zone Policy and Carbon Dioxide Emissions: a Synthetic Control Group Approach." Polish Journal of Environmental Studies 31.4 (2022).
     \item Höök, Mikael, Robert Hirsch, and Kjell Aleklett. ``Giant oil field decline rates and their influence on world oil production." Energy policy 37.6 (2009): 2262-2272.
-    \item Luo, Kevin, and Tomoko Kinugasa. ``Do natural disasters influence long-term savings?: Assessing the impact of the 2008 Sichuan earthquake on household saving rates using synthetic control." China: An International Journal 18.3 (2020): 59-81.
-    \item Malo, Pekka, et al. ``Computing Synthetic Controls Using Bilevel Optimization." (2020).
-    \item Vu, Tuan V., et al. ``Assessing the impact of clean air action on air quality trends in Beijing using a machine learning technique." Atmospheric Chemistry and Physics 19.17 (2019): 11303-11314.
     \item Kaul, Ashok, et al. ``Synthetic control methods: Never use all pre-intervention outcomes together with covariates." (2015).
-    \item Klößner, Stefan, et al. ``Comparative politics and the synthetic control method revisited: A note on Abadie et al.(2015)." Swiss journal of economics and statistics 154 (2018): 1-11.
     \item Klößner, Stefan, and Gregor Pfeifer. ``Outside the box: Using synthetic control methods as a forecasting technique." Applied Economics Letters 25.9 (2018): 615-618.
-\end{itemize}
+    \item Klößner, Stefan, et al. ``Comparative politics and the synthetic control method revisited: A note on Abadie et al.(2015)." Swiss journal of economics and statistics 154 (2018): 1-11.
+    \item Luo, Kevin, and Tomoko Kinugasa. ``Do natural disasters influence long-term savings?: Assessing the impact of the 2008 Sichuan earthquake on household saving rates using synthetic control." China: An International Journal 18.3 (2020): 59-81.
+    \item Maamoun, Nada. ``The Kyoto protocol: Empirical evidence of a hidden success." Journal of Environmental Economics and Management 95 (2019): 227-256.
+    \item Malo, Pekka, et al. ``Computing Synthetic Controls Using Bilevel Optimization." (2020).
+    \item Steinkraus, Arne. ``A synthetic control assessment of the green paradox: The role of climate action plans." German Economic Review 20.4 (2019): e545-e570.
+    \item Vu, Tuan V., et al. ``Assessing the impact of clean air action on air quality trends in Beijing using a machine learning technique." Atmospheric Chemistry and Physics 19.17 (2019): 11303-11314.
+    \item Xu, Yiqing. ``Generalized synthetic control method: Causal inference with interactive fixed effects models." Political Analysis 25.1 (2017): 57-76.
+\end{enumerate}
 
 
 
