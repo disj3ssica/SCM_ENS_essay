@@ -4,26 +4,26 @@
 \contentsline {subsection}{\numberline {2.2}Estimation}{4}{}%
 \contentsline {subsubsection}{\numberline {2.2.1}Bias properties of SCM}{6}{}%
 \contentsline {subsubsection}{\numberline {2.2.2}Inference and robustness checks in SCM}{6}{}%
-\contentsline {subsection}{\numberline {2.3}A detour on methodological advantages}{6}{}%
-\contentsline {subsection}{\numberline {2.4}Contextual and data requirements for a credible application}{7}{}%
-\contentsline {subsubsection}{\numberline {2.4.1}Contextual requirements}{7}{}%
-\contentsline {subsubsection}{\numberline {2.4.2}Data requirements}{8}{}%
-\contentsline {section}{\numberline {3}Effectiveness of SCM: challenges and remedies}{8}{}%
-\contentsline {subsection}{\numberline {3.1}Kaul et al. (2015) on the inclusion of lagged dependent variables}{9}{}%
-\contentsline {subsection}{\numberline {3.2}Klößner et al. (2018) on the uniqueness of weights when utilizing cross-validation techniques}{10}{}%
-\contentsline {subsection}{\numberline {3.3}Kuosmanen et al. (2021) on the true nature of numerical instability}{11}{}%
-\contentsline {subsection}{\numberline {3.4}Ferman et al. (2020) on specification searching opportunities}{12}{}%
-\contentsline {subsection}{\numberline {3.5}Klößner and Pfeifer (2017) on using SCM as a forecasting techinque}{13}{}%
-\contentsline {section}{\numberline {4}Applying SCM to the analysis of extreme natural events}{14}{}%
-\contentsline {subsection}{\numberline {4.1}Cavallo et al. (2013) on catastrophic natural disasters and economic growth}{14}{}%
-\contentsline {subsection}{\numberline {4.2}Barone, Mocetti (2014) on growth and institutions after earthquakes in Italy}{16}{}%
-\contentsline {subsection}{\numberline {4.3}Coffman, Noy (2011) on measuring the long term impact of Hurricane Iniki}{17}{}%
-\contentsline {section}{\numberline {5}Applying SCM to evaluate environmental policy}{18}{}%
-\contentsline {subsection}{\numberline {5.1}Cole, Elliott, Liu (2020) on the impact of lockdowns on Wuhan air pollution and health}{19}{}%
-\contentsline {subsection}{\numberline {5.2}Steinkraus (2018) on the green paradox}{20}{}%
-\contentsline {subsection}{\numberline {5.3}Andersson (2019) on the study of carbon taxes and CO$_2$ emissions}{21}{}%
-\contentsline {subsection}{\numberline {5.4}Maamoun (2019) on empirical evidence of the success of the Kyoto Protocol}{23}{}%
-\contentsline {subsection}{\numberline {5.5}He et al. (2022)}{24}{}%
-\contentsline {section}{\numberline {6}Potential applications to Fleurbeay project}{26}{}%
-\contentsline {section}{\numberline {7}Conclusion}{26}{}%
-\contentsline {section}{\numberline {8}References}{27}{}%
+\contentsline {subsection}{\numberline {2.3}A detour on methodological advantages}{7}{}%
+\contentsline {subsection}{\numberline {2.4}Contextual and data requirements for a credible application}{8}{}%
+\contentsline {subsubsection}{\numberline {2.4.1}Contextual requirements}{8}{}%
+\contentsline {subsubsection}{\numberline {2.4.2}Data requirements}{9}{}%
+\contentsline {section}{\numberline {3}Effectiveness of SCM: challenges and remedies}{10}{}%
+\contentsline {subsection}{\numberline {3.1}Kaul et al. (2015) on the inclusion of lagged dependent variables}{10}{}%
+\contentsline {subsection}{\numberline {3.2}Klößner et al. (2018) on the uniqueness of weights when utilizing cross-validation techniques}{11}{}%
+\contentsline {subsection}{\numberline {3.3}Kuosmanen et al. (2021) on the true nature of numerical instability}{12}{}%
+\contentsline {subsection}{\numberline {3.4}Ferman et al. (2020) on specification searching opportunities}{14}{}%
+\contentsline {subsection}{\numberline {3.5}Klößner and Pfeifer (2017) on using SCM as a forecasting techinque}{14}{}%
+\contentsline {section}{\numberline {4}Applying SCM to the analysis of extreme natural events}{15}{}%
+\contentsline {subsection}{\numberline {4.1}Cavallo et al. (2013) on catastrophic natural disasters and economic growth}{15}{}%
+\contentsline {subsection}{\numberline {4.2}Barone, Mocetti (2014) on growth and institutions after earthquakes in Italy}{17}{}%
+\contentsline {subsection}{\numberline {4.3}Coffman, Noy (2011) on measuring the long term impact of Hurricane Iniki}{19}{}%
+\contentsline {section}{\numberline {5}Applying SCM to evaluate environmental policy}{20}{}%
+\contentsline {subsection}{\numberline {5.1}Cole, Elliott, Liu (2020) on the impact of lockdowns on Wuhan air pollution and health}{20}{}%
+\contentsline {subsection}{\numberline {5.2}Steinkraus (2018) on the green paradox}{21}{}%
+\contentsline {subsection}{\numberline {5.3}Andersson (2019) on the study of carbon taxes and CO$_2$ emissions}{23}{}%
+\contentsline {subsection}{\numberline {5.4}Maamoun (2019) on empirical evidence of the success of the Kyoto Protocol}{24}{}%
+\contentsline {subsection}{\numberline {5.5}He et al. (2022)}{26}{}%
+\contentsline {section}{\numberline {6}Potential applications to Fleurbeay project}{27}{}%
+\contentsline {section}{\numberline {7}Conclusion}{27}{}%
+\contentsline {section}{\numberline {8}References}{28}{}%

@@ -35,35 +35,33 @@ Professor Marc Fleurbaey.
 \newpage
 
 
-\section{Introduction} %to do
+\section{Introduction} % TO FINISH
 
 \textcolor{red}{Lorem ipsum}
 
-sSCM termed by Athey and Imbens (2017) as ``arguably the most important innovation in the 
+SCM termed by Athey and Imbens (2017) as ``arguably the most important innovation in the 
 policy evaluation literature in the last 15 years".
 
 
 
+\section{Synthetic Control Methods}  % PROOFREADING DONE
 
-
-\section{Synthetic Control Methods}  % INFERENCE
-
-Synthetic Control Methods (SCM) have been originally proposed in Abadie and Gardeazabal 
-(2003) and by Abadie et al. (2010) to estimate the effects of aggregate interventions.
+Synthetic Control Methods (SCM) were originally proposed by Abadie and Gardeazabal 
+(2003) and Abadie et al. (2010) to estimate the effects of aggregate interventions.
 The key idea behind the method is that, when units are a few aggregate entities, 
 a better counterfactual than using any single unit can be derived by computing a 
-combination of the untreated units that closely resembles the treated one, i.e. 
-a ``synthetic control". The selection of the ``donor units" is formalized with a data
-driven procedure.
+combination of the untreated units that closely resembles the treated one, i.e., 
+a ``synthetic control". 
+The selection of the ``donor units" is formalized with a datadriven procedure.
 Although the method was originally intended for samples with few units, it has been 
 successfully applied in contexts with large samples, for instance in Acemoglu et 
 al. (2016).
 Such a synthetic control unit is computed as a weighted average of all potential 
 comparison units that best resemble the treated units. A good synthetic unit will 
-resemble treated one not only in terms of the outcomes variable (outer optimization), 
+resemble treated one not only in terms of the outcome variable (outer optimization), 
 but also in terms of the pre-treatment predictors value (inner optimization).
 
-In this section, I will introduce the method and explore feasibility, 
+In this section, I will introduce the method and explore its feasibility, 
 data requirements and methodological issues. 
 The main references are Abadie and Gardeazabal (2003) and Abadie, Diamond and 
 Hainmueller (2010), which introduced the method in the literature, and Abadie 
@@ -76,31 +74,31 @@ Suppose to have data for $j=1,..,J+1$ units, and suppose that unit $j=1$ is the
 treated unit. The ``donor pool" of untreated units which will contribute to the 
 construction of a synthetic control for unit $j=1$ is then constituted by the 
 remaining $j=2,...,J+1$ units.
-Assume that data covers $T$ periods, with periods up to $T_0$ being the 
-pre-intervention observations.
+Let us further assume that the data covers $T$ periods, with periods up to 
+$T_0$ being the pre-intervention observations.
 
 For each unit $j$ at time $t$ data is available for the outcome of interest 
 $Y_{jt}$, and for a number $k$ of predictors $X_{1j}, ..., X_{kj}$. Define the 
 $k \times 1$ vectors $\mathbf{X}_1, ..., \mathbf{X}_{J+1}$ which contain values
-of the predictors for units $j=1,...,J+1$. Define the $k \times J$ matrix 
+of the predictors for units $j=1,...,J+1$. Furthermore, let us define the $k \times J$ matrix 
 $\mathbf{X}_0= \left(\mathbf{X}_2,..., \mathbf{X}_{J+1}\right)$ which collects values of the predictors 
-or the untreated units.
+for the untreated units.
 For each unit $j$, define the potential outcome without treatment as $Y_{jt}^N$.
 For the treated unit $j=1$, define the potential response under the treatment as 
-$Y_{jt}^I$ in the post treatment period $t>T_0$. The effect of the intervetion 
-for the affected unit $j=1$ for $t>T_0$ is: 
+$Y_{jt}^I$ in the post treatment period $t>T_0$. 
+The effect of the intervetion for the affected unit $j=1$ for $t>T_0$ is: 
 \begin{equation}
 \tau_{1t}=Y_{1t}^I-Y_{1t}^N
 \end{equation}
 
 For the treated unit, $Y_{1t}^I$ is observed so that  $Y_{1t}=Y_{1t}^I$, but $Y_{jt}^N$ is not. 
-SCM provides a way to estimate $Y_{jt}^N$ for $t>T_0$, that is, how the outcome 
-of interest would have been in the absence of treatment. Notice that $\tau_{1t}$
-is allowed to change over time.
+SCM provides a way to estimate $Y_{jt}^N$ for $t>T_0$, i.e., how the outcome 
+of interest would have been in the absence of treatment. 
+Notice that $\tau_{1t}$ is allowed to change over time.
 
 
 
-\subsection{Estimation} %parte mancante su inferenza
+\subsection{Estimation} 
 
 A downside of comparative case studies lies in the attempt to select the control 
 units by informally arguing for an affinity between the treated and the untreated 
@@ -146,7 +144,7 @@ The approach in Abadie et al. (2021) is to choose weights $w_2,...,w_{J+1}$ such
 the synthetic unit resembles pre-treatment values of the treated unit in terms 
 of the outcome variable.
 Given the nonnegative constant vector $\mathbf{V}=(v_1,...,v_k)$ 
-that represent the relative importance of the $k$ predictors, the optimal 
+that represents the relative importance of the $k$ predictors, the optimal 
 weight vector $\mathbf{W}^*$ is the one that, for some positive constants $v_h$, minimizes:
 \begin{equation}
     || \mathbf{X}_1 - \mathbf{X_0} \mathbf{W} || = 
@@ -154,9 +152,10 @@ weight vector $\mathbf{W}^*$ is the one that, for some positive constants $v_h$,
 X_{hJ+1} \right) ^2} \right)^{1/2}
 \end{equation}
 
-Subject to $\sum_{j=2}^{J+1}w_j$ and $w_j \geq 0$. That is, minimizing the distance 
-between the treated unit $\mathbf{X}_1$ and the weighted combination of the 
-control units $\mathbf{X_0} \mathbf{W}$. The output $\mathbf{W}^*=
+Subject to $\sum_{j=2}^{J+1}w_j$ and $w_j \geq 0$. 
+That is, minimizing the distance between the treated unit $\mathbf{X}_1$ and 
+the weighted combination of the control units $\mathbf{X_0} \mathbf{W}$. 
+The output $\mathbf{W}^*=
 \left( w_2^*,...,w_{J+1}^*\right) '$ is used in the estimation of the treatment 
 effect for the treated unit across $t=T_0+1,...,T$ as:
 \begin{equation}
@@ -169,7 +168,7 @@ weights, which is effectively a different synthetic control
 $\mathbf{W}(\mathbf{V})=$ \newline $\left(w_2(\mathbf{V}),...,w_{J+1}(\mathbf{V})\right)'$.
 For this reason the choice of $\mathbf{V}$ is a key issue. An initial approach could 
 be to divide the predictor weights equally across the $k$ predictors included in the 
-model. However, two more elegant solutions are proposed by the authors.
+model. However, more elegant solutions are proposed by the authors.
 
 
 The proposed solution is to choose $\mathbf{V}$ such that the synthetic 
@@ -184,7 +183,7 @@ $\mathcal{T}_0 = 1,..., T_0$ :
 
 % OUT OF SAMPLE EXPLANATION
 We could choose $\mathbf{V}$ via out-of-sample validation, which requires substantial 
-pre-treatment observations. This exploits the observed pre treatment $Y_{1t}^N$
+pre-treatment observations. This exploits the observed pre-treatment $Y_{1t}^N$
 to gauge the predictive power of the variables $X_{1j},...,X_{kj}$ and assign 
 coherent weights $\mathbf{V}$. To use out-of-sample validation start by 
 dividing the $\mathcal{T}_0$ period in a \emph{training} period and a 
@@ -224,11 +223,60 @@ estimator is unbiased.
 
 
 \subsubsection{Inference and robustness checks in SCM}
-\textcolor{red}{Talk about placebo studies and robustness checks. Check Barone Mocetti, check Steinkraus 2018 part on inference} %complete
+Usual inferential techniques that rely on regression standard errors would overstate significance 
+levels when used in SCM applications. 
+Abadie et al. (2010) propose inferential methods based on the derivation of permutation distributions
+(also termed falsification exercises, or randomization tests). 
+Assuming only one treated unit and many donor units, one should proceed by reassigning the 
+treatment to each unit in the donor pool to compute placebo effects. Then,  pool together all the 
+estimated effects and consider the effect of intervention on the treated unit as significant if 
+it is extreme relative to the placebos.
+A concern with this procedure is that the placebo estimations may not possess as good a pre-treatment 
+fit as the actually treated unit does. Abadie et al. (2010) propose a measure of goodness of fit 
+based on the ratio of post-intervention quality of fit relative to pre-intervention quality of fit. 
+
+First, define the root mean squared prediction error (RMSPE) of the synthetic estimate. 
+For $0\leq t_1 \leq t_2 \leq T$ and $j=\{ 1, ..., J+1 \}$:
+\begin{equation}
+    R_j (t_1, t_2) = \left( 
+        \frac{1}{t_2-t_1+1} \sum_{t=t_1}^{t_2} (Y_{jt}-\hat{Y}_{jt}^N)^2
+    \right)^{1/2}
+\end{equation}
+\newline
+With $\hat{Y}_{jt}^N$ being the synthetic outcome for time $t$ and unit $j$ when unit $j$ is 
+considered treated and the remaining $J$ units are used as donors. Then, compute the goodness 
+of fit estimate as the ratio:
+\begin{equation}
+    r_j = \frac{R_j (T_0+1, T)}{R_j (1, T_0)}
+\end{equation}
+
+The permutation distribution of $r_j$ may be used for inference. A $p$-value to be used for 
+inference may be computed as follows:
+\begin{equation}
+    p=\frac{1}{J+1} \sum_{j=1}^{J+1} I_{+}(r_j-r_1)
+\end{equation}
+With $I_{+}$ being an indicator function with output 1 if the argument is nonnegative, zero 
+otherwise. This $p$-value represents the likelihood to find a treatment effec which is at 
+least the same magnitude as that of the treated unit, if treatment were randomly assigned 
+across donor units. 
+As stated in Abadie (2021), significance is evaluated with respect to a benchmark 
+distribution for the assignment process, which Abadie et al. (2010) implement using the 
+uniform case. 
 
 
+% ROBUSTNESS CHECKS
+Typical robustness checks would make sure that results are not excessively dependent on few 
+control units. 
+Usual checks consist in excluding from the donor pool units that are 
+exposed to conditions that might emulate treatment, or exclude the donors with the highest 
+weights from the donor pool to test the stability of the results. To give an example of the 
+former, consider the case where we are investigating the effect of local policy aimed at 
+containing polluting emissions. In this case, we would want to test robustness by excluding 
+from the donor pool any unit where similar policies have been implemented in the relevant 
+time window. 
 
-
+In sections 4 and 5 I will present a number of relevant papers, with most of them applying 
+the mentioned robustness checks and inferential techniques. 
 
 
 
@@ -244,15 +292,15 @@ estimator is unbiased.
 
 \subsection{A detour on methodological advantages}
 
-SCM come with advantages relative to other competing methods. In this subsection, 
-these features are emphasized with respect to linear regression estimators. 
+SCM has advantages relative to other competing methods, and in this subsection, 
+I will emphasize these features with respect to linear regression estimators.
 
 \emph{Transparency and goodness of fit.} While both 
 synthetic control estimation and regression estimators are applied to panel data, 
-SCM are transparent relative to the discrepancy between the treated unit and the 
+SCM is more transparent relative to the discrepancy between the treated unit and the 
 synthetic unit. Furthermore, the goodness of fit of the synthetic control unit 
 can be easily evaluated through analysis of the pre tratment period. SCM should 
-not be used if the fit in the pre treatment period is not satisfactory.
+not be used if the fit in the pre treatment period is unsatisfactory.
 
 \emph{Extrapolation prevention.} Another advantage of synthetic controls comes from the 
 restrictions placed on the weights, which prevent extrapolation. Instead, 
@@ -260,17 +308,18 @@ regression weights may lie outstide of the $[0,1]$ interval (for a comparison
 of the outcomes of SCM and regression see Abadie, Diamond and Hainmueller (2015)). 
 
 \emph{Discourages specification searching.} Synthetic control weights can be computed 
-before the observation of post-treatment outcomes, so that a researcher may decide 
-on the design of the study without knowing how it would affect the conclusions.
+before the observation of post-treatment outcomes.
+Therefore, a researcher can decide on the study design without knowing how it would 
+affect the conclusions.
 
 \emph{Weight sparsity.} When estimating weights for 
-the control group, regression estimators typically provide non zero weights to all control 
+the control group, regression estimators typically provide non-zero weights to all control 
 units. Instead, sythetic control weights are sparse. The contribution of each 
 donor unit is straightforward and allows for a geometric interpretation of the 
 sparse weights: the sythetic unit represents a point that lies in the convex hull 
 generated by the donor units with non zero weights.
 Note that with many treated units the weights are not necessarily unique nor 
-that sparse. Abadie and L'Hour (2019) offers a penalized version of SCM that 
+that sparse. Abadie and L'Hour (2019) offer a penalized version of SCM that 
 provides unique and sparse weights under some conditions.
 
 
@@ -285,13 +334,13 @@ will start from contextual requirements, and eventually move on to data requirem
 \subsubsection{Contextual requirements}
 
 The first observation is on the volatility of outcomes. Excessive random noise in the 
-outcome variable increases the likelihood of over-fitting, therefore it is advised to 
-filter out such noise before implementation, otherwise the effect of treatment 
+outcome variable increases the likelihood of over-fitting. Therefore it is advised to 
+filter out such noise before implementation; otherwise, the effect of treatment 
 may be drowned out. This concern does not come from common volatility between the 
-units, but from unit specific volatility.
+units, but from unit-specific volatility.
 
 The second observation pertains to the donor pool. For a unit to be a suitable 
-candidate of the donor units, it should not be affected by or subject to the 
+candidate for the donor units, it should not be affected by or subject to the 
 treatment provided to the unit of interest, and it should have common features 
 with the treated unit (typically, units in a similar region and/or context). 
 This entails the elimination from the 
@@ -301,7 +350,7 @@ not have happened in the absence of treatment in unit of interest.
 
 Third, a typical concern is anticipatory behavior by the units which would 
 introduce bias in the SCM estimates. Depending on data avilability, a solution 
-would be to backdate the period that marks the start of treatment. Since SCM allow 
+would be to backdate the period that marks the start of treatment. Since SCM allows 
 for differential exposure to treatment across time, the initial periods that 
 are barely affected by treatment may show very small effects, whereas the subsequent 
 periods will show larger effects.
@@ -319,7 +368,7 @@ potential direction of the bias and account for that in their analysis.
 
 \subsubsection{Data requirements}
 
-For the method to accurately and credibly track the treated unit there must be 
+For the method to accurately and credibly track the treated unit, there must be 
 availability of a window of pre-treatment observations from all units. Using large 
 periods of time may present the issue of structural breaks in the pre-treatment 
 span, affecting the structural stability of the model. 
@@ -331,32 +380,29 @@ especially if they are expected to intensify or dissipate over time.
 
 
 
-
-
-\section{Effectiveness of SCM: challenges and remedies}
+\section{Effectiveness of SCM: challenges and remedies}   % PROOFREADING DONE
 
 Similar to any other technique, the application of synthetic controls demands 
 careful consideration of the proper data and contextual prerequisites that must be 
 fulfilled, along with fulfilling the required conditions for its use to claim a 
 causal explanation of outcomes. Various features are currently being debated and 
 enhanced in the literature, while some areas remain unexplored. 
-For instance, such an area is the investigation of computational aspects, 
-which is still relatively under-researched and holds significant potential for 
-improvement.
+For instance, an area that still needs to be investigated is the computational 
+aspects of synthetic control methods, which is still relatively under-researched 
+and holds significant potential for improvement.
 
 
 
 \subsection{Kaul et al. (2015) on the inclusion of lagged dependent variables}
 
-The predictors in a synthetic control application can be lagged outcome variables and other 
-economically relevant variables with explanatory power for the dependent. Generally, 
-the lagged outcomes tend to have greater predictive power than the covariates included 
-in the model. 
-Although the intuitive approach would be to include all pre-treatment lagged outcome 
-variables and all the covariates, doing so could nullify the effect of the covariates 
-for both nested and regression optimization approaches. The potental bias arising 
-from this mechanic is something to be mindful of when considering what to include 
-in the model.
+The predictors used in a synthetic control application can include lagged outcome 
+variables and other economically relevant variables that have explanatory power for 
+the dependent variable. Generally, the lagged outcomes tend to have greater predictive 
+power than the covariates included in the model. Although the intuitive approach 
+would be to include all pre-treatment lagged outcome variables and covariates, doing 
+so could nullify the effect of the covariates for both nested and regression 
+optimization approaches. It's important to be mindful of the potential bias arising 
+from this when deciding what to include in the model.
 
 To illustrate this, write predictor matrices as:
 \begin{equation}
@@ -364,8 +410,8 @@ To illustrate this, write predictor matrices as:
     X_0 = \left( \begin{matrix} C_0 \\ Z_0 \end{matrix} \right)
 \end{equation}
 
-Where $C_i$ represent covariates, and $Z_i$ represent the dependent variable elements.
-In a similar manner, rewrite matrix $V$ as:
+Here, $C_i$ represents covariates, and $Z_i$ represents the dependent variable elements. 
+Similarly, we can rewrite matrix $V$ as:
 \begin{equation}
     V = \begin{pmatrix}
         V_C & 0 \\
@@ -387,26 +433,26 @@ If we denote $W^{**}$ as:
 \begin{equation}
     W^{**} := \underset{W}{\arg\min}  (Z_1 -Z_0 W)' (Z_1-Z_0 W) 
 \end{equation}
-Then, for any $V$ we would have:
+Then, for any $V$, we would have:
 \begin{equation}
     (Z_1-Z_0 W^{**})' (Z_1-Z_0 W^{**}) \le (Z_1 - Z_0  W^*(V))' (Z_1 - Z_0 W^*(V))
 \end{equation}
-However, choosing $V$ such that $V_C$ is zero and $V_Z$ is the identity matrix yields:
+However, if we choose $V$ such that $V_C$ is zero and $V_Z$ is the identity matrix, we get:
 \begin{equation}
     W^* (V^*) = W^{**}
 \end{equation}
 
 The implication is that the outer optimization would want null predictor weights 
-even if the inner optimization would assign them positive weights. Thus, the synthetic 
-control would end up ignoring the covariates. Consequently, even if positive $V$ elements 
-are reported, they are effectively ignored. Bias emerges from this dynamic if the 
-covariates are relevant explanatory elements of the dependent. To solve for this, they 
-advise to exclude outcomes lags in the inner optimization so that positive weights 
-emerge for other predictors.
+even if the inner optimization would assign them positive weights. 
+As a result, the synthetic control would end up ignoring the covariates.
+Consequently, even if positive $V$ elements are reported, they are effectively ignored. 
+Bias emerges from this dynamic if the covariates are relevant explanatory elements of the dependent. 
+To solve for this, it's recommended to exclude some outcomes lags in the inner 
+optimization so that positive weights emerge for other predictors.
 
 The authors illustrate this by replicating a paper by Billmeier and Nannicini (2013), 
 and highlight a stark difference in estimated treatment effects when using all 
-pre-treatment dependent varibles observation as opposed to not doing so. 
+pre-treatment dependent varibles observation as opposed to not doing so.
 
 This dynamic may be exploited to understand the predictive power of predictors via the 
 comparison of a full lagged dependent variable model and a reduced lagged dependent 
@@ -425,7 +471,7 @@ When using the out-of-sample validation technique,
 predictor weights are not necessarily uniquely defined, so that when replicating 
 Abadie et al. (2015) the authors find different yet equivalent solutions 
 for the weights depending on the software package used (specifically, R with 
-the SYNTH package versus STATA) and on the specific donor units ordering (alphabetical 
+the SYNTH package versus STATA) and on the specific donor unit ordering (alphabetical 
 versus custom).
 
 Cross-validation requires the sectioning of the pre-treatment observations 
@@ -441,7 +487,7 @@ proportionally increasing ambiguity.
 
 On the other hand, the one-step procedure to estimate donor weights $W^*(V^*)$ 
 provides a well-defined estimator that outputs unique donor weights. The authors 
-stress that the ill-defined cross-validation synthetic control estimator is no 
+stress that the ill-defined cross-validation synthetic control estimator is not a 
 failure of the method as such, and that the ambiguity may be negligible, although 
 a positive $k-\alpha$ is the typical scenario.
 
@@ -450,18 +496,19 @@ a positive $k-\alpha$ is the typical scenario.
 
 \subsection{Kuosmanen et al. (2021) on the true nature of numerical instability}
 
-In contrast with the findings from Klößner et al. (2018) that point to the 
-cross-validation method as culprit, Kuosmanen et al. (2021) ascribe numerical 
-instability to the commonly used \emph{Synth} package algorithm available for 
-R, STATA and Matlab and the MSCMT algorithm which produce unstable and suboptimal 
-weights that to converge to the existing optimum unique solution. 
+In contrast to the findings of Klößner et al. (2018), who attribute numerical 
+instability to the cross-validation method, Kuosmanen et al. (2021) attribute it to 
+the commonly used \emph{Synth} package algorithm available for R, STATA, and Matlab, 
+as well as the MSCMT algorithm, which produce unstable and suboptimal weights that 
+fail to converge to the existing optimum unique solution. 
 Therefore, different ordering of the donors and predictors affect the results. 
 
-The authors stress that numerical instability is not the underlying flaw, but more 
-a symptom. They show that the model has a tendency for corner solutions that 
-is the true design flaw and is caused by joint optimization of donor and 
-predictors weights. The computational complexity of what is an NP-hard 
-bilevel optimization problem causes other packages to fail. 
+The authors emphasize that numerical instability is not the underlying flaw but 
+more of a symptom. They demonstrate that the model has a tendency for corner 
+solutions, which is the true design flaw and is caused by the joint optimization 
+of donor and predictor weights. The computational complexity of this NP-hard 
+bilevel optimization problem causes other packages to fail.
+
 Their proposed solution is to determine predictor and donor 
 weights by applying a two-step algorithm that optimizes the donor 
 weights when the predicor weights are given (note that the \emph{Synth} package 
@@ -476,7 +523,7 @@ notation:
 % mathematical formal restatement of the problem by Malo et al. (2020)
 \begin{equation}
     \min_{\mathbf{v,w}} L_V = 
-    \frac{1}{T^{pre}} \left(y_1^{pre}-Y_0^{pre}w)\right) ' 
+    \frac{1}{T^{pre}} \left(y_1^{pre}-Y_0^{pre}w\right) ' 
     \left( y_1^{pre}-Y_0^{pre}w \right)
 \end{equation}
 
@@ -575,13 +622,7 @@ competitively with respect to other methods.
 
 
 
-
-
-
-
-
-
-\section{Applying SCM to the analysis of extreme natural events}
+\section{Applying SCM to the analysis of extreme natural events}  % PROOFREADING DONE
 Synthetic control methods have been applied to the study of right-to-carry laws, 
 legalized prostitution, immigration policy, corporate connections, minimum wages and 
 much more. This section focuses on reviewing the literature that applies synthetic 
@@ -603,7 +644,7 @@ of reinvestment and upgrading of capital (think of the Schumpeterian creative de
 \subsubsection*{Strategy}
 For each country affected by a natural disaster, the authors compute a counterfactual 
 via SCM. The synthetic controls are computed from data about unaffected countries with 
-the aim of producing a counterfactual for a country affected by a large not recurring 
+the aim of producing a counterfactual for a country affected by a large, non-recurring 
 event. Only disasters before the year 2000 are considered.
 
 The model is applied on a sample of $J+1$ countries, where the first country $J=1$ is 
@@ -613,7 +654,7 @@ for country $i$ at time $t$ if the country is exposed to the disaster, and $Y^N_
 is GDP per capita for country $i$ at time $t$ in the absence of a disaster. 
 While $Y^I_{1t}$ is observed, we need to find an estimate for $Y^N_{1t}$. 
 Following Abadie et al. (2010), they proceed by estimating $W^*$ and $V^*$ such that 
-the MSPE is minimized using the out-of-sample validation technique. 
+the MSPE is minimized using the out-of-sample validation approach. 
 
 
 \subsubsection*{Data}
@@ -645,7 +686,7 @@ The authors only focus on large disasters, defined as exceeding the cutoffs of 9
 and 75th percentiles of the world distribution of number of people killed. The 99th percentile 
 corresponds to more than 233 deaths per 1 million inhabitants, the 90th to 17 deaths per 1 
 million, and the 75th to 7 deaths per 1 million (the mortality of Hurricane Katrina in 2005).
-Using these cutoffs, the subsample of diasters happening before 2000 with full data are of 4 
+Using these cutoffs, the subsample of disasters happening before 2000 with full data are of 4 
 events for the 99th percentile cutoff, 18 for the 90th percentile and 22 for the 74th percentile.
 
 
@@ -688,8 +729,8 @@ Weights $W$ are chosen to minimize the MSPE function.
 
 
 \subsubsection*{Data}
-Data for the main outcome variable GDP per capita and a 
-number of predictors (labor units, invesments, population, sectoral shares of value added) comes 
+Data for the main outcome variable GDP per capita and a number of predictors (labor 
+units, invesments, population, sectoral shares of value added) comes 
 from the CRENOS research institute and covers the 1951-2004 period. Then, the same data for 
 2004-2009 comes from the National Statistical Institute (ISTAT). Human capital data comes from 
 ISTAT's census information.
@@ -708,18 +749,21 @@ first earthquake in the Friuli region affected killed 922 and 218,200 people, th
 in Irpinia (Campania and Basilicata regions) affected 407,700 and killed 4689.
 
 \subsubsection*{Results}
-The method attaches sparse weights to a small number of donor pool regions in both cases, as usual.
-The main results are the absence of a significant short term shock. Accounting for fiscal stimulus 
-in the form of financial aid highlights that it represented a sizeable chunk of regional GDP, so much 
-so that without financial aid, in the five years following the disasters, Friuli's GDP per capita would 
-have been 2-4\% lower and Irpinia's would have been 6-11\% lower. However, in the long term the synthetic 
-control detects two divergent trends of GDP per capita in the two regions. This can be reconnected to 
+The method assigns sparse weights to a small number of donor pool regions in both cases, as usual.
+The main results indicate the absence of a significant short term shock. 
+Accounting for fiscal stimulus in the form of financial aid highlights that it 
+represented a sizeable chunk of regional GDP.
+Without financial aid, in the five years following the disasters, Friuli's GDP per capita would 
+have been 2-4\% lower and Irpinia's would have been 6-11\% lower. 
+However, in the long term the synthetic 
+control detects two divergent trends of GDP per capita in the two regions. 
+This can be reconnected to 
 the quality of institutions and the consequent use of financial aid resources, with Friuli steering 
 toward virtuous reconstruction, and Irpinia experiencing more rent seeking behaviors and misallocation 
 of resources.  
 
-Financial aid designed in a way that is conscious of the institutional quality and local dynamics 
-favours immediate reconstruction and cushions the negative effects on GDP.
+Designing financial aid in a way that is conscious of institutional quality and local 
+dynamics favors immediate reconstruction and cushions the negative effects on GDP.
 
 
 
@@ -758,8 +802,7 @@ of around 15\% of the total county employment.
 
 
 
-
-\section{Applying SCM to evaluate environmental policy}
+\section{Applying SCM to evaluate environmental policy}   % PROOFREADING DONE
 This section is dedicated to a literature review focused on policy evaluation related 
 to emissions, international agreements and event studies. Analogously to the previous 
 section, I will focus on strategy, data sources and results for each work. 
@@ -779,10 +822,10 @@ implemented a lockdown at least two weeks in advance with respect to other citie
 
 The authors adopt a machine learning approach that allows to remove the effect of 
 weather conditions on concentrations of pollutants. 
-Weather normalisation has two advantages, the first being that it allows
-to account for local meterological conditions since they affect pollution 
-concentration. A second advantage is the reduced volatility in the outcome variable, 
-a prerequisite for successful application of the SCM.
+Weather normalization has two advantages: first, it allows for accounting of local 
+meteorological conditions since they affect pollution concentration, and second, 
+it reduces volatility in the outcome variable, which is a prerequisite for successful 
+application of the SCM.
 
 Traditional econometric approaches are unsuitable for this task
 because pollutant concentration depends on local weather conditions. 
@@ -791,14 +834,14 @@ the better option, applied by combining the work from Grange et al. (2018) and V
 al. (2019).
 
 Once weather is normalized, the augmented SCM (ASCM) is used to compute synthetic 
-values for pollutants concentration in Wuhan, had the lockdown not taken place. The 
+values for pollutant concentrations in Wuhan, had the lockdown not taken place. The 
 advantage of ASCM over regular SCM is that it extends the method to cases where 
 the pre-treatment fit would not be good enough to proceed. The Ben-Michael et al. (2019) 
 approach allows for negative weights and improves the pre-intervention fit compared to 
 SCM alone and penalizes for potential extrapolation. 
 
 The analysis spans for 30 days pre-treatment, and for around 12 days starting from 
-January 21st when a clear drop in emission manifests itself. 
+January 21st, when a clear drop in emission manifests itself. 
 The authors exclude anticipation effects as backdating the treatment does not affect 
 results. 
 
@@ -819,11 +862,11 @@ concentration of PM10 was not statistically significant. Concentrations of SO$_2
 did not fall, likely due to coal reliance for domestic heating during 
 winter, as well as CO. 
 The findings on reduced mortality show a rough estimate of 496 prevented deaths in 
-Wuhan, 3368 prevented deaths in Hubei and 10,822 in China.
+Wuhan, 3368 prevented deaths in Hubei, and 10,822 in China.
 
 Overall, this paper sheds light on how measures such as pedestrian zones, congestion 
 charging and urban planning could benefit public health. It also shows how SCM may 
-be combined with other methods to estimate the effect of climate impacting policies.
+be combined with other methods to estimate the effect of climate-impacting policies.
 
 
 \subsection{Steinkraus (2018) on the green paradox}
@@ -852,18 +895,16 @@ points in time (1990 and the pre-treatment year).
 
 
 \subsubsection*{Data}
-Data on total tons of coal produced comes from the US Energy Information Administration 
-(EIA) for the period covering 1983 to 2014. In addition to that, additional predictor 
-variables on total state-level energy production, total state-level energy consumption 
-and renewable energy production is retrieved from the EIA State Energy Data System. 
-Data on population density comes from US census data. 
-In order to control for extraction capability, data for the amount of recoverable 
-reserves is added as a predictor (from Höök and Aleklett (2009)). Additionally, data on 
-GDP comes from the Bureau of Economic Analysis. 
-Finally, in order to control for trade openness, data on foreign distribution of coal 
-production as reported by EIA Annual Coal Distribution Report is added, as well as data 
-from the Seamless Digital Chart of the World and from the Global Administrative Areas 
-Project used to compute the average distance from the coast of the states. 
+The data used in this study consists of total tons of coal produced between 1983 and 
+2014, which was obtained from the US Energy Information Administration (EIA).
+Other predictor variables include state-level energy production, state-level energy 
+consumption, renewable energy production (all obtained from the EIA State Energy Data 
+System), population density (from US census data), recoverable reserves (from Höök and 
+Aleklett (2009)), GDP (from the Bureau of Economic Analysis), and foreign distribution 
+of coal production (as reported by EIA Annual Coal Distribution Report). 
+The study also used data from the Seamless Digital Chart of the World and the Global 
+Administrative Areas Project to compute the average distance of the states from the 
+coast, in order to control for trade openness.
 
 \subsubsection*{Results}
 Findings show that while Pennsylvania, Virginia and Kentucky have not experienced an 
@@ -885,8 +926,9 @@ The carbon tax mainly affects the transport sector, which is Sweden's main sourc
 CO$_2$ emissions. For this reason, the analysis focuses on this sector.
 
 \subsubsection*{Strategy}
-The first part of the paper is dedicated to the construction via SCM of a counterfactual 
-Sweden from a donor pool of 14 countries. Since Sweden was one of the first countries 
+The first part of the paper is dedicated to constructing a counterfactual Sweden using 
+the SCM, with a donor pool of 14 countries.
+Since Sweden was one of the first countries 
 in the world to implement such taxation, with the exlicit aim of preventing climate change, 
 it represents an ideal candidate for the method.
 The second half of the paper computes tax and price elasticites of the demand for gas fuel 
@@ -899,11 +941,11 @@ in order to minimize the MSPE of the outcome variable over the pre-treatment per
 \subsubsection*{Data}
 The World Bank provided panel data on per capita CO$_2$ emissions for the transport sector 
 of 25 OECD countries, by source (road, rail, domestic navigation, domestic aviation). 
-Data on transport emissions is gathered from national statistical agencies and includes 
+Data on transport emissions was gathered from national statistical agencies and includes 
 all transport fuels in order to capture changes in demand and substitutions between fuels 
 (mainly between gasoline and diesel). The dataset covers the period from 1960 to 2005, when 
-the EU implemented the European Unioni Emissions Trading System. Thus, there are 30 years 
-before treatment and 16 years post treatment.
+the EU implemented the European Unioni Emissions Trading System. 
+Thus, there are 30 years before treatment and 16 years post treatment.
 Of the 25 aforementioned countries, those that enacted carbon taxes that touched the 
 transport sector, made large changes in fuel taxation, or are known for fuel tourism were 
 ecluded from the dataset.
@@ -992,12 +1034,12 @@ significant and of similar magnitude.
 This study uses SCM to analyse the effect of China's free trade zones (FTZ) policy 
 launched in 2013 in Shanghai and in 2015 in Tianjin, Guangdong and Fujian to 
 understand its impact on CO$_2$ emissions. 
-FTZ consist in areas where policy is implemented to promote trade openness. 
-For instance, they introduced free entry and exit of goods, zero-tariff areas, the 
-acceleration of government functions, incentives to apply innovative management models, 
-promote investments an more. They are specifically targeted at the service and 
+FTZs are areas where policies are implemented to promote trade openness, such as 
+free entry and exit of goods, zero-tariff areas, acceleration of government functions, 
+incentives to apply innovative management models, and promotion of investments. 
+They are specifically targeted at the service and 
 finance sectors (banking, insurance, capital markets). 
-FTZ can reduce emissions if they improve efficiency in allocation 
+FTZs can reduce emissions if they improve efficiency in allocation 
 of environment resources and boost eco-friendly technologies. They might increase 
 emissions if they attract high emission goods production.
 
@@ -1009,18 +1051,18 @@ The authors use the creation of the first FTZ in Shanghai as the start of treatm
 and build a synthetic Shanghai to measure the impact of the policy on CO$_2$ 
 emissions. They apply the SCM as in Abadie et al. (2010) to construct a synthetic 
 counterfactual unit based on CO$_2$ emissions from a donor pool of provinces 
-where FTZ were not established. 
+where FTZs were not established. 
 
 The same analysis is done for the provinces of Tianjin, Fujian and Guangdong 
-which established FTZ in 2015. Eventually, the provinces of Liaoning, 
+which established FTZs in 2015. Eventually, the provinces of Liaoning, 
 Zhejiang, Henan, Hubei, Chongqing, Sichuan and Shaanxi implemented FTZ in 2017.
 When computing synthetic Shanghai, these provinces are excluded from the donor 
 pool to avoid anticipatory effects on their emissions.
 
-Note that the authors do not state whether they investigated other emission 
-impacting policies that may have been active in the donor pool provinces 
-during the training period. If such policy was implemented, the province should 
-have been excluded from the donors. 
+Note that the authors do not mention whether they controlled for other 
+emission-affecting policies that may have been in effect in the donor pool 
+provinces during the training period. If such policies were present, the 
+provinces should have been excluded from the donor pool.
 
 
 \subsubsection*{Data}
@@ -1034,8 +1076,9 @@ overall lower figures for emissions than those from the IPCC, with an approximat
 8\% discrepancy in 2012, but it does provide data at the provincial level, which is 
 not easily retrievable from the IPCC dataset.  
 
-The dataset covers 30 provinces for the period 1997-2017. From the China Statistical 
-Yearbook and the China Energy Statistical Yearbook the authors gather data on 
+The dataset covers 30 provinces for the period 1997-2017. 
+From the China Statistical 
+Yearbook and the China Energy Statistical Yearbook, the authors gather data on 
 output per capita, industrial structure, developmente level of service industry, 
 industrial structure upgrading, energy efficiency, population density, technology 
 market turnover and total fossil energy consumption. 
@@ -1054,16 +1097,12 @@ than other provinces to policy of this kind.
 
 
 
-
-
-\section{Potential applications to Fleurbeay project}
+\section{Potential applications to Fleurbeay project} % TO FINISH
 \textcolor{red}{Lorem ipsum}
 
 
 
-
-
-\section{Conclusion}
+\section{Conclusion}  % TO FINISH
 \textcolor{red}{Lorem ipsum}
 
 
@@ -1080,7 +1119,7 @@ than other provinces to policy of this kind.
 
 
 
-\section{References}
+\section{References}  % done
 \begin{enumerate}
     \item Abadie, Alberto, Alexis Diamond, and Jens Hainmueller. ``Synthetic control methods for comparative case studies: Estimating the effect of California's tobacco control program." Journal of the American statistical Association 105.490 (2010): 493-505.
     \item Abadie, Alberto, and Javier Gardeazabal. ``The economic costs of conflict: A case study of the Basque Country." American economic review 93.1 (2003): 113-132.
