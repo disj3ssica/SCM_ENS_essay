@@ -32,16 +32,56 @@ Professor Marc Fleurbaey.
 \newpage
 
 
-\section{Introduction} % TO FINISH
+\section{Introduction} % DONE
 
-\textcolor{red}{Lorem ipsum}
+Climate change poses a serious threat to our planet, with the potential for 
+devastating consequences for societies, economies, and ecosystems. To mitigate the impacts 
+of climate change and prepare for extreme natural events such as hurricanes, droughts, 
+and floods, policymakers are increasingly turning to various policy measures. However, 
+evaluating the effectiveness of these policy interventions is challenging, as there is 
+often no clear counterfactual or comparison group to assess the impact of the policy.
 
-SCM termed by Athey and Imbens (2017) as ``arguably the most important innovation in the 
-policy evaluation literature in the last 15 years".
+In recent years, synthetic control methods (SCM) have emerged as a powerful tool to 
+address this challenge. SCM involves constructing a synthetic control group that 
+closely matches the characteristics of the treated unit or group, using a combination 
+of pre-treatment data and a set of control units. This allows us to estimate the 
+counterfactual impact of the policy intervention by comparing the treated unit to 
+its synthetic counterpart.
+
+SCM has been successfully applied in a range of fields, including economics, public 
+policy, and epidemiology. Athey and Imbens (2017) describe it as ``arguably the most 
+important innovation in the policy evaluation literature in the last 15 years".
+In this paper, I focus on the application of SCM to climate policy and extreme 
+natural events analysis. Specifically, I examine how SCM can be used to evaluate 
+the effectiveness of climate policies such as carbon taxes, international agreements, 
+and emissions regulations. 
+I also explore how SCM can be used to estimate the impact of extreme natural 
+events on economic outcomes and human welfare, and to assess the effectiveness 
+of adaptation measures.
+
+This paper makes several contributions to the literature. First, I provide an 
+overview of the principles and methods of SCM, and discuss its advantages and 
+limitations compared to traditional evaluation methods. Second, I review the 
+existing literature on the application of SCM to climate policy and extreme 
+natural events analysis, highlighting the key findings and insights. Third, 
+I present several case studies that illustrate the potential of SCM to inform 
+climate policy and natural disaster management. Finally, I discuss the implications 
+of our findings for policymakers and researchers, and identify areas for future research.
+
+The paper is organized as follows. 
+Section 2 introduces the synthetic control method and its estimation techniques, as 
+well as the key requirements for a successful application. 
+Section 3 explores the criticalities of the method and provides an update on recent 
+improvements to the basic model. 
+In Section 4, I illustrate the application of the method to the study of extreme 
+natural events, while in Section 5, I showcase its use in evaluating environmental 
+policies. 
+Finally, Section 6 and 7 discuss and summarize the main findings and implications 
+of the paper.
 
 
 
-\section{Synthetic Control Methods}  % PROOFREADING DONE
+\section{Synthetic Control Methods}  %  DONE
 
 Synthetic Control Methods (SCM) were originally proposed by Abadie and Gardeazabal 
 (2003) and Abadie et al. (2010) to estimate the effects of aggregate interventions.
@@ -49,7 +89,8 @@ The key idea behind the method is that, when units are a few aggregate entities,
 a better counterfactual than using any single unit can be derived by computing a 
 combination of the untreated units that closely resembles the treated one, i.e., 
 a ``synthetic control". 
-The selection of the ``donor units" is formalized with a datadriven procedure.
+The selection of the ``donor units" which contribute to the creation of a synthetic 
+counterfactual is formalized with a datadriven procedure.
 Although the method was originally intended for samples with few units, it has been 
 successfully applied in contexts with large samples, for instance in Acemoglu et 
 al. (2016).
@@ -377,7 +418,7 @@ especially if they are expected to intensify or dissipate over time.
 
 
 
-\section{Effectiveness of SCM: challenges and remedies}   % PROOFREADING DONE
+\section{Effectiveness of SCM: challenges and remedies}   %  DONE
 
 Similar to any other technique, the application of synthetic controls demands 
 careful consideration of the proper data and contextual prerequisites that must be 
@@ -619,7 +660,7 @@ competitively with respect to other methods.
 
 
 
-\section{Applying SCM to the analysis of extreme natural events}  % PROOFREADING DONE
+\section{Applying SCM to the analysis of extreme natural events}  %  DONE
 Synthetic control methods have been applied to the study of right-to-carry laws, 
 legalized prostitution, immigration policy, corporate connections, minimum wages and 
 much more. This section focuses on reviewing the literature that applies synthetic 
@@ -638,7 +679,7 @@ not affect the rate of technological progress, hence it should only affect short
 growth, and endogenous growth models even stating that growth could be higher as a result 
 of reinvestment and upgrading of capital (think of the Schumpeterian creative destruction).
 
-\subsubsection*{Strategy}
+\subsubsection{Strategy}
 For each country affected by a natural disaster, the authors compute a counterfactual 
 via SCM. The synthetic controls are computed from data about unaffected countries with 
 the aim of producing a counterfactual for a country affected by a large, non-recurring 
@@ -654,21 +695,15 @@ Following Abadie et al. (2010), they proceed by estimating $W^*$ and $V^*$ such 
 the MSPE is minimized using the out-of-sample validation approach. 
 
 
-\subsubsection*{Data}
+\subsubsection{Data}
 The authors use a dataset covering 196 countries between 1970 and 2008 which includes:
 \begin{itemize}
     \item Data on real GDP per capita and purchasing power parity (PPP) from the World 
     Bank and World Development Indicators (WDI).
-    \item GDP predictors for:
-    \begin{itemize}
-        \item Trade openness from WDI;
-        \item Capital stock from Penn World Tables (PWT);
-        \item Land area in km$^2$;
-        \item Population;
-        \item Secondary educational attainment from Lutz et al. (2007);
-        \item Latitude in absolute value;
-        \item Polity 2 indicator from the Polity IV database.
-    \end{itemize}
+    \item GDP predictors for trade openness (from WDI), capital stock (from Penn World 
+    Tables (PWT)), land area in km$^2$, population, secondary educational attainment 
+    (from Lutz et al. (2007)), latitude in absolute value, Polity 2 indicator (from 
+    the Polity IV database).
     \item Data on natural disasters, their human and economic impacts from the EM-DAT 
     database collected by the Centre for Research on the Epidemiology of Disasters (CRED). 
     This database has information on natural disasters from 1900 at the condition that 
@@ -687,7 +722,7 @@ Using these cutoffs, the subsample of disasters happening before 2000 with full 
 events for the 99th percentile cutoff, 18 for the 90th percentile and 22 for the 74th percentile.
 
 
-\subsubsection*{Results}
+\subsubsection{Results}
 Findings show statistically significant and negative effects of very large natural disasters 
 on GDP growth for both the short and long term. 
 Of the four very large disaster (99th percentile cutoff), the 1979 Islamic Iranian Revolution 
@@ -715,17 +750,17 @@ A second advantage comes from the better comparability of Italian
 regions rather than comparing different countries. Third, they use data that is uniformly built 
 since it comes from the same institutional sources. Finally, they can control for the amount of 
 public transfers to each region, which play a crucial role in the long term consequences of 
-natural disasters depending on whether these resources are misallocated or used to enchance the 
+natural disasters depending on whether these resources are misallocated or used to enhance the 
 local economy.
 
-\subsubsection*{Strategy}
+\subsubsection{Strategy}
 The empirical strategy is the one from Abadie et al. (2010) applied to $J+1$ Italian regions, of 
 which the first unit is the treated one. 
 Weights $W$ are chosen to minimize the MSPE function. 
 
 
 
-\subsubsection*{Data}
+\subsubsection{Data}
 Data for the main outcome variable GDP per capita and a number of predictors (labor 
 units, invesments, population, sectoral shares of value added) comes 
 from the CRENOS research institute and covers the 1951-2004 period. Then, the same data for 
@@ -742,10 +777,10 @@ turnout for each region. The final one is the diffusion of newspaper readership 
 from Accertamenti Diffusione Stampa (ADS).
 
 Data on the number of deaths and affected people comes from the aforementioned EM-DAT. The 
-first earthquake in the Friuli region affected killed 922 and 218,200 people, the second one 
+first earthquake in the Friuli region killed 922 and affected 218,200 people, the second one 
 in Irpinia (Campania and Basilicata regions) affected 407,700 and killed 4689.
 
-\subsubsection*{Results}
+\subsubsection{Results}
 The method assigns sparse weights to a small number of donor pool regions in both cases, as usual.
 The main results indicate the absence of a significant short term shock. 
 Accounting for fiscal stimulus in the form of financial aid highlights that it 
@@ -775,22 +810,22 @@ Differences between the counties are mostly in terms of size.
 At the time of publication, Iniki was the strongest hurricane to hit Hawaii in recorded 
 history causing \$7.4 billion of direct damages at 2008 prices.
 
-\subsubsection*{Strategy}
+\subsubsection{Strategy}
 The SCM is applied as in Abadie et al. (2010) with regression methods. %finish this
 To account for potential indirect effects of Iniki on the economic activity of other 
 counties, Maui was excluded from the donor pool. This is due to tourism being the 
 main economic activity of all islands and to Maui temporarily absorbing arrivals to 
 the Kauai county right after the hurricane hit. 
 Another channel for indirect effects could be that of displacement of residents to 
-other islands, however data shows this is not an issue. 
+other islands; however, data shows this is not an issue. 
 
-\subsubsection*{Data}
-Data is collected from 1975 to 2011, and inlcudes information on employment, resident 
+\subsubsection{Data}
+Data is collected from 1975 to 2011, and includes information on employment, resident 
 population, personal income, per capita income and transfer payments.  
 Once again, data on deaths (4) and affected people (25,000) comes from the EM-DAT 
 database.
 
-\subsubsection*{Results}
+\subsubsection{Results}
 Placebo testing confirms two central results. 
 First, Kauai's population trajectory took a hit following the hurricane, and kept 
 growing slowly in the following years, with a permanent loss of 12\% of its population.
@@ -799,7 +834,7 @@ of around 15\% of the total county employment.
 
 
 
-\section{Applying SCM to evaluate environmental policy}   % PROOFREADING DONE
+\section{Applying SCM to evaluate environmental policy}   %  DONE
 This section is dedicated to a literature review focused on policy evaluation related 
 to emissions, international agreements and event studies. Analogously to the previous 
 section, I will focus on strategy, data sources and results for each work. 
@@ -813,7 +848,7 @@ Improvements in air quality and associated health benefits are critical points i
 elaborating climate change related policy and emissions regulation. 
 
 
-\subsubsection*{Strategy} %complete
+\subsubsection{Strategy} %complete
 The city of Wuhan is one of 17 large cities in its province of Hubei (China), and it 
 implemented a lockdown at least two weeks in advance with respect to other cities. 
 
@@ -826,7 +861,7 @@ application of the SCM.
 
 Traditional econometric approaches are unsuitable for this task
 because pollutant concentration depends on local weather conditions. 
-Instead, according to the authors random forest machine learning techniques are 
+Instead, according to the authors, random forest machine learning techniques are 
 the better option, applied by combining the work from Grange et al. (2018) and Vu et 
 al. (2019).
 
@@ -846,14 +881,14 @@ The impacts on mortality are computed considering only NO$_2$ and the related he
 damages literature. The outcome is a significant reduction in mortality. 
 
 
-\subsubsection*{Data}
+\subsubsection{Data}
 The Qingyue Open Environmental Data Center provides data on sulphur dioxide (SO$_2$), 
 nitrogen dioxide (NO$_2$), carbon monoxide (CO) and particulate matter (PM10) between 
 January 2013 and February 2020 for thirty Chinese cities. Information on 
 meterological data (temperature, relative humidity, wind direction, wind speed and 
 pressure) comes from the ``worldmet" R package (https://www.ncdc.noaa.gov/isd).
 
-\subsubsection*{Results}
+\subsubsection{Results}
 Concentrations of NO$_2$ fell significantly during the period, while the fall in 
 concentration of PM10 was not statistically significant. Concentrations of SO$_2$ 
 did not fall, likely due to coal reliance for domestic heating during 
@@ -879,19 +914,19 @@ becomes effective.
 
 
 
-\subsubsection*{Strategy}
+\subsubsection{Strategy}
 A counterfactual of coal production is computed for each treated state and used to 
-estimate the causal impact on coal production of the plan taking effect. 
+estimate the causal impact on coal production of the plan coming into effect. 
 The donor pool is comprised of 16 states (Alabama, Georgia, Idaho, Indiana, Kansas, 
 Louisiana, Mississipi, Nebraska, North Dakota, Ohio, Oklahoma, South Dakota, Tennessee, 
 Texas, West Virginia and Wyoming) that did not announce or enact any plan for 
 greenhouse gas emissions.
 
-In light of Kaul et al. (2015) the author includes only coal production data at two 
+In light of Kaul et al. (2015), the author includes only coal production data at two 
 points in time (1990 and the pre-treatment year).
 
 
-\subsubsection*{Data}
+\subsubsection{Data}
 The data used in this study consists of total tons of coal produced between 1983 and 
 2014, which was obtained from the US Energy Information Administration (EIA).
 Other predictor variables include state-level energy production, state-level energy 
@@ -903,17 +938,17 @@ The study also used data from the Seamless Digital Chart of the World and the Gl
 Administrative Areas Project to compute the average distance of the states from the 
 coast, in order to control for trade openness.
 
-\subsubsection*{Results}
+\subsubsection{Results}
 Findings show that while Pennsylvania, Virginia and Kentucky have not experienced an 
 increase in coal production, Montana actually experienced a positive and significant 
 jump in production as a response. 
 However, this might be due to the state being the most likely to experience the 
-legislation as an exogenous shock for political reasons and lack of previous ainterventions 
+legislation as an exogenous shock for political reasons and lack of previous interventions 
 on the topic. Montana also has a longer border that allowed for export to unaffected 
 states.
  
 Due to mixed results, the author concludes that state by state reactions are very case 
-dependent and point to a need to consider the supply side when constructing legislation.
+dependent and point to the need to consider the supply side when constructing legislation.
 
 
 \subsection{Andersson (2019) on the study of carbon taxes and CO$_2$ emissions}
@@ -922,11 +957,11 @@ the introduction of a carbon tax and a value added tax on transport fuel in 1991
 The carbon tax mainly affects the transport sector, which is Sweden's main source of 
 CO$_2$ emissions. For this reason, the analysis focuses on this sector.
 
-\subsubsection*{Strategy}
+\subsubsection{Strategy}
 The first part of the paper is dedicated to constructing a counterfactual Sweden using 
 the SCM, with a donor pool of 14 countries.
 Since Sweden was one of the first countries 
-in the world to implement such taxation, with the exlicit aim of preventing climate change, 
+in the world to implement such taxation, with the explicit aim of preventing climate change, 
 it represents an ideal candidate for the method.
 The second half of the paper computes tax and price elasticites of the demand for gas fuel 
 in order to distinguish between the carbon tax and the value added tax effects. 
@@ -935,7 +970,7 @@ The author applies the method as in Abadie et al. (2010) via joint optimization 
 in order to minimize the MSPE of the outcome variable over the pre-treatment period.  
 
 
-\subsubsection*{Data}
+\subsubsection{Data}
 The World Bank provided panel data on per capita CO$_2$ emissions for the transport sector 
 of 25 OECD countries, by source (road, rail, domestic navigation, domestic aviation). 
 Data on transport emissions was gathered from national statistical agencies and includes 
@@ -952,7 +987,7 @@ and percentage of population residing in urban areas comes from the World Bank a
 of Feenstra, Inklaar and Timmer (2013) and Dargay, Gately and Sommer (2007). Additional 
 predictors are lagged values of CO$_2$ emissions for 1970, 1980, 1989.
 
-\subsubsection*{Results}
+\subsubsection{Results}
 An analysis of differences between Sweden and the other OECD countries shows that 
 until 1980 growth of emissions was similar, but between 1980 and 1989 emissions in Sweden 
 grew twice as fast. This would have led to distorted results if a method such as 
@@ -983,7 +1018,7 @@ agreement, and other endogeneity concerns. GSCM offers the possibility to apply 
 of multiple treated units to compute a more accurate counterfactual for the treated group. 
 
 
-\subsubsection*{Strategy}
+\subsubsection{Strategy}
 GSCM improves upon regular SCM by combining it with interactive fixed effects model (IFE). It 
 allows for multiple treated unit and different treatment periods. It also provides standard errors 
 and confidence intervals, which improves interpretability. Overall, GSCM is preferable to SCM 
@@ -1002,14 +1037,14 @@ The treated group is composed of the 34 Annex B countries for which necessary da
 The computed counterfactual would represent the business as usual (BAU) scenario. 
 
 
-\subsubsection*{Data}
+\subsubsection{Data}
 The dataset covers the 1995-2012 period, with the treatment period starting in 2005 (enforcement 
 period) rather than 2008 (commitment period). The output variable is greenhouse gas (GHG) excluding 
 land use and forestry, gathered from the World Resources Institute's (WRI) CAIT Climate Data Explorer. 
 Three control variables from the World Bank's World Development Indicators are included: real GDP 
 per capita, squared real GDP per capita and population size.
 
-\subsubsection*{Results}
+\subsubsection{Results}
 According to results, the KP successfully reduced GHG emissions for the industrialized countries by 
 an estimated 6.8\% with respect to the BAU counterfactual scenario. Removing EU countries from the 
 treated group as a robustness exercise shows that the KP is still effective at reducing emissions, 
@@ -1027,7 +1062,7 @@ agreement, the author uses the US as a control group for industrialized countrie
 significant and of similar magnitude.
 
 
-\subsection{He et al. (2022)}
+\subsection{He et al. (2022) on Free Trade Zones in China}
 This study uses SCM to analyse the effect of China's free trade zones (FTZ) policy 
 launched in 2013 in Shanghai and in 2015 in Tianjin, Guangdong and Fujian to 
 understand its impact on CO$_2$ emissions. 
@@ -1043,7 +1078,7 @@ emissions if they attract high emission goods production.
 The FTZ policy also included environmental quality suggestions to improve energy 
 efficiency and reduce GHG and other pollutants emissions. 
 
-\subsubsection*{Strategy}
+\subsubsection{Strategy}
 The authors use the creation of the first FTZ in Shanghai as the start of treatment 
 and build a synthetic Shanghai to measure the impact of the policy on CO$_2$ 
 emissions. They apply the SCM as in Abadie et al. (2010) to construct a synthetic 
@@ -1062,7 +1097,7 @@ provinces during the training period. If such policies were present, the
 provinces should have been excluded from the donor pool.
 
 
-\subsubsection*{Data}
+\subsubsection{Data}
 It is notable that the authors do not employ data on CO$_2$ emissions from the 
 Intergovernmental Panel on Climate Change (IPCC), notwithstanding this being the 
 standard practice in the literature. Instead, they choose to use the official 
@@ -1082,7 +1117,7 @@ market turnover and total fossil energy consumption.
 
 
 
-\subsubsection*{Results}
+\subsubsection{Results}
 Looking at the synthetic Shanghai computed with the exclusion of the 2015 and 2017 
 FTZ provinces, they find a 10\% reduction in CO$_2$ emissions from treatment. 
 The same analysis is done for the provinces of Tianjin and Fujian, whose synthetic 
@@ -1094,19 +1129,122 @@ than other provinces to policy of this kind.
 
 
 
-\section{Potential applications to Fleurbeay project} % TO FINISH
-\textcolor{red}{Lorem ipsum}
+\section{Discussion and conclusion} % DONE 
+The synthetic control method has emerged as a valuable tool for causal inference 
+in a variety of fields, particularly in settings where traditional experimental 
+designs are not feasible. The method provides a flexible and intuitive 
+framework for estimating treatment effects, allowing researchers to assess the 
+impact of policy interventions, natural disasters, and other events of interest. 
+The method has been successfully applied to a wide range of research questions, 
+from the evaluation of health interventions to the analysis of economic policies.
+
+SCM has several advantages over other methods of causal inference. 
+First, it allows for the estimation of treatment effects in settings where 
+traditional experimental designs are not feasible. 
+Second, the method can incorporate a large number of covariates, allowing for 
+a more comprehensive analysis of treatment effects. 
+Third, the method is relatively easy to implement and interpret, making it 
+accessible to researchers with varying levels of statistical expertise. 
+Fourth, the method provides a flexible and intuitive framework for estimating 
+treatment effects, allowing researchers to assess the impact of policy interventions, 
+natural disasters, and other events of interest. 
+Overall, SCM represents an important contribution to the field of causal inference, 
+providing researchers with a powerful and accessible tool for estimating treatment 
+effects.
+
+%critical part
+Despite its widespread use in applied research, SCM has 
+been subject to some criticisms and limitations. 
+One of the main critiques relates to the choice of control units, which can 
+significantly affect the results of the analysis. 
+In particular, the method assumes that the control units have a similar 
+pre-intervention trend as the treated unit, which may not always be the case. 
+Moreover, the choice of control units can be subjective and dependent on the 
+researcher's prior beliefs, leading to potential bias in the estimation of treatment 
+effects.
+
+%alternative method DiD
+There are several other methods that can be used for similar purposes. 
+One such method is the difference-in-differences (DiD) approach. 
+In fact, many of the reviewed paper present DiD results alongside SCM for comparison. 
+Nevertheless, SCM remains a valid alternative when we are unable to verify the 
+parallel trend assumption or when there is uncertainty in its regard.
+
+%alternative method RD
+Regression discontinuity (RD) is another method that can be used to estimate treatment 
+effects in settings where the treatment is assigned based on a threshold. 
+RD compares outcomes on either side of the threshold, assuming that units close to 
+the threshold are similar in all other respects except for the treatment. 
+While RD can be a powerful tool for causal inference, it requires a precise definition 
+of the threshold and may not be applicable in settings where the treatment is not 
+assigned based on a clear cutoff. 
+
+%alternative method ML
+Outside of the realm of parametric methods, a notable competitor for SCM is found in 
+machine learning (ML) applications.
+When choosing between SCM and ML algorithms for causal inference, it is important to 
+consider the specific characteristics of the data and research question. 
+ML algorithms are non-parametric methods that can handle complex relationships between 
+variables and accommodate time-varying treatment effects and multiple treated units. 
+However, they may suffer from overfitting if the model is too complex and may be more 
+difficult to interpret. 
+On the other hand, SCM is a parametric method that requires less strict assumptions about 
+the data and may be more appropriate for research questions that require a clear 
+causal interpretation of the treatment effect or when estimating a few key parameters. 
+ML algorithms may be more appropriate when the research question requires more 
+flexibility and complexity in the modeling or when the data is more complex and 
+requires a different approach. 
 
 
+Despite its limitations, SCM has continued to be refined and extended in recent years, 
+with new developments addressing some of its shortcomings. 
+For example, extensions of the method have been proposed to accommodate multiple 
+treated units or time-varying treatment effects, while other research has focused on 
+improving the selection of control units or assessing the sensitivity of the results 
+to alternative specifications. Also, the work of Klößner and colleagues successfully 
+addresses the aforementioned numerical instability issues.
 
-\section{Conclusion}  % TO FINISH
-\textcolor{red}{Lorem ipsum}
+In this paper, I introduced SCM as a statistical technique 
+for estimating causal effects in observational studies. 
+I discussed the properties, advantages, and contextual and data requirements 
+of the method. 
+Furthermore, I explored the challenges that may hinder the effectiveness of the 
+method and discussed how to address them.
 
+In the second part of the paper, I reviewed the literature on the applications of 
+the synthetic control method to the analysis of extreme natural events and the 
+evaluation of environmental policies. 
+I highlighted some of the key findings and insights from these studies, which 
+demonstrate the potential of the synthetic control method for policy evaluation 
+and decision-making.
+For policymakers, the method can help in making evidence-based decisions, 
+particularly in situations where experimental designs are not feasible. 
+It can also provide a more accurate and reliable estimation of the causal effect 
+of a policy, which can help in allocating resources more effectively.
 
+Overall, this analysis suggests that SCM can be a valuable 
+tool for causal inference and policy evaluation in situations where traditional 
+experimental designs are not feasible. 
+However, as with any statistical method, its effectiveness depends on the quality 
+and availability of data, as well as the appropriateness of the assumptions and 
+model specifications. 
 
-
-
-
+That said, there are still opportunities for improvement. 
+One potential avenue for development is the incorporation of machine learning 
+techniques, such as deep learning and neural networks, into the synthetic 
+control framework. These techniques may offer advantages in capturing complex 
+interactions among variables and improving prediction accuracy. 
+An example of successful combination between these methods is Cole et al. (2020), 
+as discussed in section 5.1.
+Another possible avenue is the use of multiple treatment groups, where the 
+synthetic control group is created for each treatment group, rather than a 
+single control group. This approach may provide more robust and reliable 
+estimates of causal effects in situations where there are multiple policies 
+or interventions being evaluated simultaneously. 
+Finally, the development of more efficient algorithms for the solution of 
+joint optimization problems is a focal point to consider.
+Overall, the continued development and refinement of SCM have the potential to 
+further expand its usefulness and applicability.
 
 
 
